@@ -1,16 +1,12 @@
-file_path = "temporary_data_formatting/employeesRaw.txt"
-output_path = "temporary_data_formatting/employees.txt"
+file_path = "temporary_data_formatting/branchesRaw.txt"
+output_path = "temporary_data_formatting/branches.txt"
 output = []
-
 def to_line(items: list) -> str:
     return ("{"
-            f"ID: {items[0]},"
-            f"Name: \"{items[1]}\","
-            f"Position: \"{items[2]}\","
-            f"Department: \"{items[3]}\","
-            f"Email: \"{items[4]}\","
-            f"Phone: \"{items[5]}\","
-            f"BranchID: {items[6]}"
+            f"id: {items[0]},"
+            f"name: \"{items[1]}\","
+            f"address: \"{items[2]}\","
+            f"phone: \"{items[3].strip()}\""
             "},\n")
 
 with open(file_path, 'r') as file:
