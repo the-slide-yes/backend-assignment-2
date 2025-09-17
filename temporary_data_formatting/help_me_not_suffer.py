@@ -1,21 +1,35 @@
-file_path = "temporary_data_formatting/branchesRaw.txt"
-output_path = "temporary_data_formatting/branches.txt"
-output = []
-def to_line(items: list) -> str:
+def to_employee_line(items: list) -> str:
     return ("{"
-            f"id: {items[0]},"
-            f"name: \"{items[1]}\","
-            f"address: \"{items[2]}\","
-            f"phone: \"{items[3].strip()}\""
+            f"id: {items[0]}, "
+            f"name: \"{items[1]}\", "
+            f"position: \"{items[2]}\", "
+            f"department: \"{items[3]}\", "
+            f"email: \"{items[4]}\", "
+            f"phone: \"{items[5]}\", "
+            f"branchId: {items[6]}"
             "},\n")
 
-with open(file_path, 'r') as file:
-    _ = file.readline()
+def to_branch_line(items: list) -> str:
+    return ("{"
+            f"id: {items[0]}, "
+            f"name: \"{items[1]}\", "
+            f"address: \"{items[2]}\", "
+            f"phone: \"{items[3]}\""
+            "},\n")
 
-    for row in file.readlines():
-        items = row.split("\t")
+def reformat(raw_file_path: str, output_path: str, to_line):
+    output = []
 
-        output.append(to_line(items))
+    with open(raw_file_path, 'r') as file:
+        _ = file.readline()
 
-with open(output_path, 'w') as file:
-    file.writelines(output)
+        for row in file.readlines():
+            items = row.strip().split("\t")
+
+            output.append(to_line(items))
+
+    with open(output_path, 'w') as file:
+        file.writelines(output)
+
+reformat("temporary_data_formatting/branchesRaw.txt", "temporary_data_formatting/branches.txt", to_branch_line)
+reformat("temporary_data_formatting/employeesRaw.txt", "temporary_data_formatting/employees.txt", to_employee_line)
