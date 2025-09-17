@@ -5,7 +5,7 @@ export interface Branch {
     phone: string
 }
 
-const Branches: Branch[] = [
+export const Branches: Branch[] = [
     {id: 1, name: "Vancouver Branch", address: "1300 Burrard St, Vancouver, BC, V6Z 2C7", phone: "604-456-0022"},
     {id: 2, name: "Edmonton Branch", address: "7250 82 Ave NW, Edmonton, AB, T6B 0G4", phone: "780-468-6800"},
     {id: 3, name: "Arborg Branch", address: "317-A Fisher Road, Arborg, MB, R0C 0A0", phone: "204-555-3461"},
@@ -17,7 +17,3 @@ const Branches: Branch[] = [
     {id: 9, name: "Saint John Branch", address: "500 Fairville Blvd, Saint John, NB, E2M 5H7", phone: "506-632-0225"},
     {id: 10, name: "Headingley Branch", address: "500 McIntosh Rd, Headingley, MB, R4H 1B6", phone: "204-999-5555"}
 ];
-
-export function getBranches(): Branch[] {
-    return Branches;
-}

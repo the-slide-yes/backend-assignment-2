@@ -8,7 +8,7 @@ export interface Employee {
     branchId: number
 }
 
-const Employees: Employee[] = [
+export const Employees: Employee[] = [
     {id: 1, name: "Alice Johnson", position: "Branch Manager", department: "Management", email: "alice.johnson@pixell-river.com", phone: "604-555-0148", branchId: 1},
     {id: 2, name: "Amandeep Singh", position: "Customer Service Representative", department: "Customer Service", email: "amandeep.singh@pixell-river.com", phone: "780-555-0172", branchId: 2},
     {id: 3, name: "Maria Garcia", position: "Loan Officer", department: "Loans", email: "maria.garcia@pixell-river.com", phone: "204-555-0193", branchId: 3},
@@ -45,7 +45,3 @@ const Employees: Employee[] = [
     {id: 34, name: "Maya Singh", position: "Marketing Coordinator", department: "Marketing", email: "maya.singh@pixell-river.com", phone: "416-555-0478", branchId: 8},
     {id: 35, name: "Lila Spence", position: "Loan Coordinator", department: "Loans", email: "lila.spence@pixell-river.com", phone: "204-555-0480", branchId: 4}
 ];
-
-export function getEmployees(): Employee[] {
-    return Employees
-}
