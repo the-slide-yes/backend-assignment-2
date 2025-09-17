@@ -1,83 +1,83 @@
 export interface Employee {
-    ID: number,
-    Name: string,
-    Position: string,
-    Department: string,
-    Email: string,
-    Phone: string,
-    BranchID: number
+    id: number,
+    name: string,
+    position: string,
+    department: string,
+    email: string,
+    phone: string,
+    branchId: number
 }
 
 const Employees: Employee[] = [
-    {ID: 1,Name: "Alice Johnson",Position: "Branch Manager",Department: "Management",Email: "alice.johnson@pixell-river.com",Phone: "604-555-0148",BranchID: 1
+    {id: 1,name: "Alice Johnson",position: "Branch Manager",department: "Management",email: "alice.johnson@pixell-river.com",phone: "604-555-0148",branchId: 1
     },
-    {ID: 2,Name: "Amandeep Singh",Position: "Customer Service Representative",Department: "Customer Service",Email: "amandeep.singh@pixell-river.com",Phone: "780-555-0172",BranchID: 2
+    {id: 2,name: "Amandeep Singh",position: "Customer Service Representative",department: "Customer Service",email: "amandeep.singh@pixell-river.com",phone: "780-555-0172",branchId: 2
     },
-    {ID: 3,Name: "Maria Garcia",Position: "Loan Officer",Department: "Loans",Email: "maria.garcia@pixell-river.com",Phone: "204-555-0193",BranchID: 3
+    {id: 3,name: "Maria Garcia",position: "Loan Officer",department: "Loans",email: "maria.garcia@pixell-river.com",phone: "204-555-0193",branchId: 3
     },
-    {ID: 4,Name: "James Wilson",Position: "IT Support Specialist",Department: "IT",Email: "james.wilson@pixell-river.com",Phone: "604-555-0134",BranchID: 1
+    {id: 4,name: "James Wilson",position: "IT Support Specialist",department: "IT",email: "james.wilson@pixell-river.com",phone: "604-555-0134",branchId: 1
     },
-    {ID: 5,Name: "Linda Martinez",Position: "Financial Advisor",Department: "Advisory",Email: "linda.martinez@pixell-river.com",Phone: "780-555-0165",BranchID: 2
+    {id: 5,name: "Linda Martinez",position: "Financial Advisor",department: "Advisory",email: "linda.martinez@pixell-river.com",phone: "780-555-0165",branchId: 2
     },
-    {ID: 6,Name: "Michael Brown",Position: "Teller",Department: "Operations",Email: "michael.brown@pixell-river.com",Phone: "204-555-0187",BranchID: 3
+    {id: 6,name: "Michael Brown",position: "Teller",department: "Operations",email: "michael.brown@pixell-river.com",phone: "204-555-0187",branchId: 3
     },
-    {ID: 7,Name: "Patricia Taylor",Position: "Operations Manager",Department: "Operations",Email: "patricia.taylor@pixell-river.com",Phone: "204-555-0204",BranchID: 3
+    {id: 7,name: "Patricia Taylor",position: "Operations Manager",department: "Operations",email: "patricia.taylor@pixell-river.com",phone: "204-555-0204",branchId: 3
     },
-    {ID: 8,Name: "Chen Wei",Position: "Senior Loan Officer",Department: "Loans",Email: "chen.wei@pixell-river.com",Phone: "204-555-0218",BranchID: 5
+    {id: 8,name: "Chen Wei",position: "Senior Loan Officer",department: "Loans",email: "chen.wei@pixell-river.com",phone: "204-555-0218",branchId: 5
     },
-    {ID: 9,Name: "Charles Thomas",Position: "Accountant",Department: "Finance",Email: "charles.thomas@pixell-river.com",Phone: "204-555-0225",BranchID: 5
+    {id: 9,name: "Charles Thomas",position: "Accountant",department: "Finance",email: "charles.thomas@pixell-river.com",phone: "204-555-0225",branchId: 5
     },
-    {ID: 10,Name: "Elizabeth Jackson",Position: "Marketing Specialist",Department: "Marketing",Email: "elizabeth.jackson@pixell-river.com",Phone: "204-555-0237",BranchID: 6
+    {id: 10,name: "Elizabeth Jackson",position: "Marketing Specialist",department: "Marketing",email: "elizabeth.jackson@pixell-river.com",phone: "204-555-0237",branchId: 6
     },
-    {ID: 11,Name: "Christopher White",Position: "IT Manager",Department: "IT",Email: "christopher.white@pixell-river.com",Phone: "604-555-0244",BranchID: 1
+    {id: 11,name: "Christopher White",position: "IT Manager",department: "IT",email: "christopher.white@pixell-river.com",phone: "604-555-0244",branchId: 1
     },
-    {ID: 12,Name: "Jennifer Harris",Position: "Branch Manager",Department: "Management",Email: "jennifer.harris@pixell-river.com",Phone: "204-555-0252",BranchID: 6
+    {id: 12,name: "Jennifer Harris",position: "Branch Manager",department: "Management",email: "jennifer.harris@pixell-river.com",phone: "204-555-0252",branchId: 6
     },
-    {ID: 13,Name: "William Martin",Position: "Customer Service Representative",Department: "Customer Service",Email: "william.martin@pixell-river.com",Phone: "416-555-0260",BranchID: 8
+    {id: 13,name: "William Martin",position: "Customer Service Representative",department: "Customer Service",email: "william.martin@pixell-river.com",phone: "416-555-0260",branchId: 8
     },
-    {ID: 14,Name: "Jessica Lewis",Position: "Loan Processor",Department: "Loans",Email: "jessica.lewis@pixell-river.com",Phone: "514-555-0278",BranchID: 7
+    {id: 14,name: "Jessica Lewis",position: "Loan Processor",department: "Loans",email: "jessica.lewis@pixell-river.com",phone: "514-555-0278",branchId: 7
     },
-    {ID: 15,Name: "Thomas Walker",Position: "Teller",Department: "Operations",Email: "thomas.walker@pixell-river.com",Phone: "506-555-0285",BranchID: 9
+    {id: 15,name: "Thomas Walker",position: "Teller",department: "Operations",email: "thomas.walker@pixell-river.com",phone: "506-555-0285",branchId: 9
     },
-    {ID: 16,Name: "Karen Hall",Position: "Financial Analyst",Department: "Finance",Email: "karen.hall@pixell-river.com",Phone: "204-555-0294",BranchID: 6
+    {id: 16,name: "Karen Hall",position: "Financial Analyst",department: "Finance",email: "karen.hall@pixell-river.com",phone: "204-555-0294",branchId: 6
     },
-    {ID: 17,Name: "Steven Allen",Position: "Security Specialist",Department: "IT",Email: "steven.allen@pixell-river.com",Phone: "416-555-0307",BranchID: 8
+    {id: 17,name: "Steven Allen",position: "Security Specialist",department: "IT",email: "steven.allen@pixell-river.com",phone: "416-555-0307",branchId: 8
     },
-    {ID: 18,Name: "Donna Young",Position: "HR Specialist",Department: "Human Resources",Email: "donna.young@pixell-river.com",Phone: "514-555-0315",BranchID: 7
+    {id: 18,name: "Donna Young",position: "HR Specialist",department: "Human Resources",email: "donna.young@pixell-river.com",phone: "514-555-0315",branchId: 7
     },
-    {ID: 19,Name: "Joseph Hernandez",Position: "Branch Manager",Department: "Management",Email: "joseph.hernandez@pixell-river.com",Phone: "204-555-0328",BranchID: 10
+    {id: 19,name: "Joseph Hernandez",position: "Branch Manager",department: "Management",email: "joseph.hernandez@pixell-river.com",phone: "204-555-0328",branchId: 10
     },
-    {ID: 20,Name: "Sarah King",Position: "Customer Service Supervisor",Department: "Customer Service",Email: "sarah.king@pixell-river.com",Phone: "506-555-0336",BranchID: 9
+    {id: 20,name: "Sarah King",position: "Customer Service Supervisor",department: "Customer Service",email: "sarah.king@pixell-river.com",phone: "506-555-0336",branchId: 9
     },
-    {ID: 21,Name: "Emily Clark",Position: "Loan Specialist",Department: "Loans",Email: "emily.clark@pixell-river.com",Phone: "204-555-0342",BranchID: 5
+    {id: 21,name: "Emily Clark",position: "Loan Specialist",department: "Loans",email: "emily.clark@pixell-river.com",phone: "204-555-0342",branchId: 5
     },
-    {ID: 22,Name: "David Turner",Position: "Financial Consultant",Department: "Advisory",Email: "david.turner@pixell-river.com",Phone: "780-555-0354",BranchID: 2
+    {id: 22,name: "David Turner",position: "Financial Consultant",department: "Advisory",email: "david.turner@pixell-river.com",phone: "780-555-0354",branchId: 2
     },
-    {ID: 23,Name: "Amara Patel",Position: "IT Analyst",Department: "IT",Email: "amara.patel@pixell-river.com",Phone: "604-555-0366",BranchID: 1
+    {id: 23,name: "Amara Patel",position: "IT Analyst",department: "IT",email: "amara.patel@pixell-river.com",phone: "604-555-0366",branchId: 1
     },
-    {ID: 24,Name: "Daniel Scott",Position: "Branch Assistant Manager",Department: "Management",Email: "daniel.scott@pixell-river.com",Phone: "204-555-0378",BranchID: 3
+    {id: 24,name: "Daniel Scott",position: "Branch Assistant Manager",department: "Management",email: "daniel.scott@pixell-river.com",phone: "204-555-0378",branchId: 3
     },
-    {ID: 25,Name: "Samantha Wright",Position: "Customer Service Representative",Department: "Customer Service",Email: "samantha.wright@pixell-river.com",Phone: "416-555-0380",BranchID: 8
+    {id: 25,name: "Samantha Wright",position: "Customer Service Representative",department: "Customer Service",email: "samantha.wright@pixell-river.com",phone: "416-555-0380",branchId: 8
     },
-    {ID: 26,Name: "Haruto Tanaka",Position: "Marketing Manager",Department: "Marketing",Email: "haruto.tanaka@pixell-river.com",Phone: "204-555-0392",BranchID: 6
+    {id: 26,name: "Haruto Tanaka",position: "Marketing Manager",department: "Marketing",email: "haruto.tanaka@pixell-river.com",phone: "204-555-0392",branchId: 6
     },
-    {ID: 27,Name: "Laura Adams",Position: "Teller",Department: "Operations",Email: "laura.adams@pixell-river.com",Phone: "514-555-0404",BranchID: 7
+    {id: 27,name: "Laura Adams",position: "Teller",department: "Operations",email: "laura.adams@pixell-river.com",phone: "514-555-0404",branchId: 7
     },
-    {ID: 28,Name: "Ryan Phillips",Position: "Loan Officer",Department: "Loans",Email: "ryan.phillips@pixell-river.com",Phone: "204-555-0416",BranchID: 3
+    {id: 28,name: "Ryan Phillips",position: "Loan Officer",department: "Loans",email: "ryan.phillips@pixell-river.com",phone: "204-555-0416",branchId: 3
     },
-    {ID: 29,Name: "Olivia Parker",Position: "IT Support Specialist",Department: "IT",Email: "olivia.parker@pixell-river.com",Phone: "604-555-0428",BranchID: 1
+    {id: 29,name: "Olivia Parker",position: "IT Support Specialist",department: "IT",email: "olivia.parker@pixell-river.com",phone: "604-555-0428",branchId: 1
     },
-    {ID: 30,Name: "Brandon Campbell",Position: "Financial Advisor",Department: "Advisory",Email: "brandon.campbell@pixell-river.com",Phone: "780-555-0430",BranchID: 2
+    {id: 30,name: "Brandon Campbell",position: "Financial Advisor",department: "Advisory",email: "brandon.campbell@pixell-river.com",phone: "780-555-0430",branchId: 2
     },
-    {ID: 31,Name: "Amber Roberts",Position: "Customer Relations Specialist",Department: "Customer Service",Email: "amber.roberts@pixell-river.com",Phone: "204-555-0442",BranchID: 4
+    {id: 31,name: "Amber Roberts",position: "Customer Relations Specialist",department: "Customer Service",email: "amber.roberts@pixell-river.com",phone: "204-555-0442",branchId: 4
     },
-    {ID: 32,Name: "Wei Zhang",Position: "Senior Financial Analyst",Department: "Finance",Email: "wei.zhang@pixell-river.com",Phone: "204-555-0454",BranchID: 5
+    {id: 32,name: "Wei Zhang",position: "Senior Financial Analyst",department: "Finance",email: "wei.zhang@pixell-river.com",phone: "204-555-0454",branchId: 5
     },
-    {ID: 33,Name: "John Black",Position: "Branch Manager",Department: "Management",Email: "john.black@pixell-river.com",Phone: "204-555-0466",BranchID: 6
+    {id: 33,name: "John Black",position: "Branch Manager",department: "Management",email: "john.black@pixell-river.com",phone: "204-555-0466",branchId: 6
     },
-    {ID: 34,Name: "Maya Singh",Position: "Marketing Coordinator",Department: "Marketing",Email: "maya.singh@pixell-river.com",Phone: "416-555-0478",BranchID: 8
+    {id: 34,name: "Maya Singh",position: "Marketing Coordinator",department: "Marketing",email: "maya.singh@pixell-river.com",phone: "416-555-0478",branchId: 8
     },
-    {ID: 35,Name: "Lila Spence",Position: "Loan Coordinator",Department: "Loans",Email: "lila.spence@pixell-river.com",Phone: "204-555-0480",BranchID: 4}
+    {id: 35,name: "Lila Spence",position: "Loan Coordinator",department: "Loans",email: "lila.spence@pixell-river.com",phone: "204-555-0480",branchId: 4}
 ];
 
 export function getEmployees(): Employee[] {
