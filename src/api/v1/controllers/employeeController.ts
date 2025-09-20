@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import * as employeeService from "src/api/v1/services/employeeService";
+import * as employeeService from "../services/employeeService";
 import { Employee } from "../models/employeeModel";
-import { HTTP_STATUS } from "src/constants/httpConstants";
+import { HTTP_STATUS } from "../../../constants/httpConstants";
 
 export const getAllEmployees = async (req: Request, res: Response): Promise<void> => {
     try {

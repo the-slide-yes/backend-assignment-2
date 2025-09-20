@@ -1,4 +1,4 @@
-import { Employees } from "src/data/employees";
+import { Employees } from "../../../data/employees";
 import { Employee } from "../models/employeeModel";
 
 /**
