@@ -1,9 +1,19 @@
-import { Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 import * as employeeService from "../services/employeeService";
 import { Employee } from "../models/employeeModel";
 import { HTTP_STATUS } from "../../../constants/httpConstants";
 
-export const getAllEmployees = async (req: Request, res: Response): Promise<void> => {
+/**
+ * Manages requests and reponses to retrieve all Employees
+ * @param req - The express Request
+ * @param res  - The express Response
+ * @param next - The express middleware chaining function
+ */
+export const getAllEmployees = async (
+    req: Request, 
+    res: Response, 
+    next: NextFunction
+): Promise<void> => {
     try {
         const employees: Employee[] = await employeeService.getAllEmployees();
 
@@ -11,14 +21,22 @@ export const getAllEmployees = async (req: Request, res: Response): Promise<void
             message: "Got all employees", 
             data: employees 
         });
-    } catch (error) {
-        res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
-            message: "Failed to get employees"
-        });
+    } catch (error: unknown) {
+        next(error);
     }
 };
 
-export const getEmployeeById = async (req: Request, res: Response): Promise<void> => {
+/**
+ * Manages requests and reponses to retrieve one Employee
+ * @param req - The express Request
+ * @param res  - The express Response
+ * @param next - The express middleware chaining function
+ */
+export const getEmployeeById = async (
+    req: Request, 
+    res: Response, 
+    next: NextFunction
+): Promise<void> => {
     try {
         const id: number = Number(req.params.id);
 
@@ -34,20 +52,28 @@ export const getEmployeeById = async (req: Request, res: Response): Promise<void
                 data: employee
             });
         }
-    } catch (error) {
+    } catch (error: unknown) {
         if ((error as Error).message.startsWith("Error finding employee")) {
             res.status(HTTP_STATUS.BAD_REQUEST).json({
                 message: "ID doesn't match any existing employee"
             });
         } else {
-            res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
-                message: "Failed to get employees"
-            });
+            next(error);
         }
     }
 };
 
-export const createEmployee = async (req: Request, res: Response): Promise<void> => {
+/**
+ * Manages requests, reponses, and validation to create an Employee
+ * @param req - The express Request
+ * @param res  - The express Response
+ * @param next - The express middleware chaining function
+ */
+export const createEmployee = async (
+    req: Request, 
+    res: Response, 
+    next: NextFunction
+): Promise<void> => {
     try {
         const {
             name,
@@ -113,14 +139,22 @@ export const createEmployee = async (req: Request, res: Response): Promise<void>
                 data: newEmployee
             });
         }
-    } catch (error) {
-        res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
-            message: "Failed to create employee"
-        });
+    } catch (error: unknown) {
+        next(error);
     }
 };
 
-export const updateEmployee = async (req: Request, res: Response): Promise<void> => {
+/**
+ * Manages requests and reponses to update an Employee
+ * @param req - The express Request
+ * @param res  - The express Response
+ * @param next - The express middleware chaining function
+ */
+export const updateEmployee = async (
+    req: Request, 
+    res: Response, 
+    next: NextFunction
+): Promise<void> => {
     try {
         const updateData: {
             name?: string;
@@ -145,20 +179,28 @@ export const updateEmployee = async (req: Request, res: Response): Promise<void>
                 data: updatedEmployee
             });
         }
-    } catch (error) {
+    } catch (error: unknown) {
         if ((error as Error).message.startsWith("Error updating employee")) {
             res.status(HTTP_STATUS.BAD_REQUEST).json({
                 message: "ID doesn't match any existing employee"
             });
         } else {
-            res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
-                message: "Failed to update employee"
-            });
+            next(error);
         }
     }
 };
 
-export const deleteEmployee = async (req: Request, res: Response): Promise<void> => {
+/**
+ * Manages requests and reponses to delete an Employee
+ * @param req - The express Request
+ * @param res  - The express Response
+ * @param next - The express middleware chaining function
+ */
+export const deleteEmployee = async (
+    req: Request, 
+    res: Response, 
+    next: NextFunction
+): Promise<void> => {
     try {
         const id: number = Number(req.params.id);
 
@@ -173,15 +215,13 @@ export const deleteEmployee = async (req: Request, res: Response): Promise<void>
                 message: confirmationMessage
             });
         }
-    } catch (error) {
+    } catch (error: unknown) {
         if ((error as Error).message.startsWith("Error finding employee")) {
             res.status(HTTP_STATUS.BAD_REQUEST).json({
                 message: "ID doesn't match any existing employee"
             });
         } else {
-            res.status(HTTP_STATUS.INTERNAL_SERVER_ERROR).json({
-                message: "Failed to delete employee"
-            });
+            next(error)
         }
     }
 };
