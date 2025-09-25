@@ -25,6 +25,28 @@ export const getEmployeeById = async (id: number): Promise<Employee> => {
 };
 
 /**
+ * Gets all employees with the specified branch ID.
+ * @param branchId - The branch ID of the intended employee.
+ * @returns The employees with the matching branch ID.
+ */
+export const getEmployeesByBranch = async (branchId: number): Promise<Employee[]> => {
+    const employeesOnBranch: Employee[] = Employees.filter((employee: Employee) => employee.branchId === branchId);
+
+    return structuredClone(employeesOnBranch);
+};
+
+/**
+ * Gets all employees in the specified department.
+ * @param department - The department of the intended employee.
+ * @returns The employees with the matching department.
+ */
+export const getEmployeesByDepartment = async (department: string): Promise<Employee[]> => {
+    const employeesInDepartment: Employee[] = Employees.filter((employee: Employee) => employee.department === department);
+
+    return structuredClone(employeesInDepartment);
+};
+
+/**
  * Creates a new employee.
  * @param employeeData - Only the fields needed to create an employee.
  * @returns The created employee.
