@@ -64,6 +64,62 @@ export const getEmployeeById = async (
 };
 
 /**
+ * Manages requests and reponses to retrieve all Employees on a branch
+ * @param req - The express Request
+ * @param res  - The express Response
+ * @param next - The express middleware chaining function
+ */
+export const getEmployeeByBranch = async (
+    req: Request, 
+    res: Response, 
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const branchId: number = Number(req.params.branchId);
+
+        if (isNaN(branchId)) {
+            res.status(HTTP_STATUS.BAD_REQUEST).json({
+                message: "Branch ID must be a number"
+            });
+        } else {
+            const employees: Employee[] = await employeeService.getEmployeesByBranch(branchId);
+
+            res.status(HTTP_STATUS.OK).json({
+                message: "Employees retrieved successfully",
+                data: employees
+            });
+        }
+    } catch (error: unknown) {
+        next(error);
+    }
+};
+
+/**
+ * Manages requests and reponses to retrieve all Employees in a department
+ * @param req - The express Request
+ * @param res  - The express Response
+ * @param next - The express middleware chaining function
+ */
+export const getEmployeeByDepartment = async (
+    req: Request, 
+    res: Response, 
+    next: NextFunction
+): Promise<void> => {
+    try {
+        const department: string = req.params.department;
+
+        const employees: Employee[] = await employeeService.getEmployeesByDepartment(department);
+
+        res.status(HTTP_STATUS.OK).json({
+            message: "Employees retrieved successfully",
+            data: employees
+        });
+    } catch (error: unknown) {
+        next(error);
+    }
+};
+
+/**
  * Manages requests, reponses, and validation to create an Employee
  * @param req - The express Request
  * @param res  - The express Response
