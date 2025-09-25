@@ -12,45 +12,71 @@ jest.mock("../src/api/v1/controllers/employeeController", () => ({
     deleteEmployee: jest.fn((req, res) => res.status(HTTP_STATUS.OK).send()),
 }));
 
-describe("Employee API Endpoints", () => {
-    it("should call getAllEmployees controller", async () => {
-        await request(app).get("/api/v1/employees");
-        expect(employeeController.getAllEmployees).toHaveBeenCalled();
+describe("Employee Routes", () => {
+    afterEach(() => {
+        jest.clearAllMocks();
     });
 
-    it("should call getAllEmployees controller", async () => {
-        await request(app).get("/api/v1/employees/1");
-        expect(employeeController.getEmployeeById).toHaveBeenCalled();
+    describe("GET /api/vi/employees/", () => {
+        it("should call getAllEmployees controller", async () => {
+            // Act
+            await request(app).get("/api/v1/employees");
+            // Assert
+            expect(employeeController.getAllEmployees).toHaveBeenCalled();
+        });
+    });
+    
+    describe("GET /api/vi/employees/:id", () => {
+        it("should call getEmployeeById controller", async () => {
+            // Act
+            await request(app).get("/api/v1/employees/1");
+            // Assert
+            expect(employeeController.getEmployeeById).toHaveBeenCalled();
+        });
     });
 
-    it("should call createEmployee controller", async () => {
-        const mockEmployee: Omit<Employee, "id"> = {
-            name: "Chad McNotsad",
-            department: "Advertisement",
-            position: "Model",
-            phone: "204-222-2222",
-            email: "chadnotsad@model.roofingcompany.ca",
-            branchId: 3
-        };
-        await request(app).post("/api/v1/employees").send(mockEmployee);
-        expect(employeeController.createEmployee).toHaveBeenCalled();
+    describe("POST /api/vi/employees/", () => {
+        it("should call createEmployee controller with valid data", async () => {
+            // Arrange
+            const mockEmployee: Omit<Employee, "id"> = {
+                name: "Chad McNotsad",
+                department: "Advertisement",
+                position: "Model",
+                phone: "204-222-2222",
+                email: "chadnotsad@model.roofingcompany.ca",
+                branchId: 3
+            };
+            // Act
+            await request(app).post("/api/v1/employees").send(mockEmployee);
+            // Assert
+            expect(employeeController.createEmployee).toHaveBeenCalled();
+        });
     });
 
-    it("should call updateEmployee controller", async () => {
-        const mockEmployee: Omit<Employee, "id"> = {
-            name: "Chad McNotsad",
-            department: "Advertisement",
-            position: "Model",
-            phone: "204-222-2222",
-            email: "chadnotsad@model.roofingcompany.ca",
-            branchId: 3
-        };
-        await request(app).put("/api/v1/employees/1").send(mockEmployee);
-        expect(employeeController.updateEmployee).toHaveBeenCalled();
+    describe("PUT /api/vi/employees/:id", () => {
+        it("should call updateEmployee controller with valid data", async () => {
+            // Arrange
+            const mockEmployee: Omit<Employee, "id"> = {
+                name: "Chad McNotsad",
+                department: "Advertisement",
+                position: "Model",
+                phone: "204-222-2222",
+                email: "chadnotsad@model.roofingcompany.ca",
+                branchId: 3
+            };
+            // Act
+            await request(app).put("/api/v1/employees/1").send(mockEmployee);
+            // Assert
+            expect(employeeController.updateEmployee).toHaveBeenCalled();
+        });
     });
 
-    it("should call deleteEmployee controller", async () => {
-        await request(app).delete("/api/v1/employees/1");
-        expect(employeeController.deleteEmployee).toHaveBeenCalled();
+    describe("DELETE /api/vi/employees/:id", () => {
+        it("should call deleteEmployee controller with valid data", async () => {
+            // Act
+            await request(app).delete("/api/v1/employees/1");
+            // Assert
+            expect(employeeController.deleteEmployee).toHaveBeenCalled();
+        });
     });
 });
