@@ -18,7 +18,7 @@ export const getAllEmployees = async (
         const employees: Employee[] = await employeeService.getAllEmployees();
 
         res.status(HTTP_STATUS.OK).json({ 
-            message: "Got all employees", 
+            message: "Employees retrieved successfully", 
             data: employees 
         });
     } catch (error: unknown) {
@@ -48,7 +48,7 @@ export const getEmployeeById = async (
             const employee: Employee = await employeeService.getEmployeeById(id);
 
             res.status(HTTP_STATUS.OK).json({
-                message: `Got employee with id: ${id}`,
+                message: "Employee retrieved successfully",
                 data: employee
             });
         }
@@ -216,7 +216,7 @@ export const deleteEmployee = async (
             });
         }
     } catch (error: unknown) {
-        if ((error as Error).message.startsWith("Error finding employee")) {
+        if ((error as Error).message.startsWith("Error deleting employee")) {
             res.status(HTTP_STATUS.BAD_REQUEST).json({
                 message: "ID doesn't match any existing employee"
             });
