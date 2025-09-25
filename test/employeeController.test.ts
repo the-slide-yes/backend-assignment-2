@@ -52,6 +52,25 @@ describe("Employee controller", () => {
                 data: mockEmployees,
             });
         });
+
+        it("should handle errors", async () => {
+            // Arrange
+            const mockError: Error = new Error("I AM AN EGG");
+            
+            (employeeService.getAllEmployees as jest.Mock).mockImplementation(() => {
+                throw mockError;
+            });
+
+            // Act
+            await employeeController.getAllEmployees(
+                mockReq as Request,
+                mockRes as Response,
+                mockNext
+            );
+
+            // Assert
+            expect(mockNext).toHaveBeenCalledWith(mockError);
+        });
     });
 
     describe("getEmployeeById", () => {
