@@ -132,6 +132,102 @@ describe("Employee controller", () => {
         });
     });
 
+    describe("getEmployeeByBranch", () => {
+        it("should get employees", async () => {
+            // Arrange
+            const mockEmployees: Employee[] = [
+                {
+                    id: 1,
+                    name: "Chad McNotsad",
+                    department: "Advertisement",
+                    position: "Model",
+                    phone: "204-222-2222",
+                    email: "chadnotsad@model.roofingcompany.ca",
+                    branchId: 3
+                },
+            ];
+            mockReq.params = { branchId: "3" };
+            (employeeService.getEmployeesByBranch as jest.Mock).mockReturnValue(mockEmployees);
+
+            // Act
+            await employeeController.getEmployeeByBranch(
+                mockReq as Request,
+                mockRes as Response,
+                mockNext
+            );
+
+            // Assert
+            expect(mockRes.status).toHaveBeenCalledWith(HTTP_STATUS.OK);
+            expect(mockRes.json).toHaveBeenCalledWith({
+                message: "Employees retrieved successfully",
+                data: mockEmployees,
+            });
+        });
+
+        it("should return bad request when branchId is missing", async () => {
+            // Act
+            await employeeController.getEmployeeByBranch(
+                mockReq as Request,
+                mockRes as Response,
+                mockNext
+            );
+
+            // Assert
+            expect(mockRes.status).toHaveBeenCalledWith(HTTP_STATUS.BAD_REQUEST);
+            expect(mockRes.json).toHaveBeenCalledWith({
+                message: "Branch ID is required"
+            });
+        });
+    });
+
+    describe("getEmployeeByDepartment", () => {
+        it("should get employees", async () => {
+            // Arrange
+            const mockEmployees: Employee[] = [
+                {
+                    id: 1,
+                    name: "Chad McNotsad",
+                    department: "Advertisement",
+                    position: "Model",
+                    phone: "204-222-2222",
+                    email: "chadnotsad@model.roofingcompany.ca",
+                    branchId: 3
+                },
+            ];
+            mockReq.params = { department: "Advertisement" };
+            (employeeService.getEmployeesByDepartment as jest.Mock).mockReturnValue(mockEmployees);
+
+            // Act
+            await employeeController.getEmployeeByDepartment(
+                mockReq as Request,
+                mockRes as Response,
+                mockNext
+            );
+
+            // Assert
+            expect(mockRes.status).toHaveBeenCalledWith(HTTP_STATUS.OK);
+            expect(mockRes.json).toHaveBeenCalledWith({
+                message: "Employees retrieved successfully",
+                data: mockEmployees,
+            });
+        });
+
+        it("should return bad request when department is missing", async () => {
+            // Act
+            await employeeController.getEmployeeByDepartment(
+                mockReq as Request,
+                mockRes as Response,
+                mockNext
+            );
+
+            // Assert
+            expect(mockRes.status).toHaveBeenCalledWith(HTTP_STATUS.BAD_REQUEST);
+            expect(mockRes.json).toHaveBeenCalledWith({
+                message: "Department name is required"
+            });
+        });
+    });
+
     describe("createEmployee", () => {
         it("should handle successful creation", async () => {
             // Arrange

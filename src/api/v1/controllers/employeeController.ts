@@ -75,19 +75,25 @@ export const getEmployeeByBranch = async (
     next: NextFunction
 ): Promise<void> => {
     try {
-        const branchId: number = Number(req.params.branchId);
-
-        if (isNaN(branchId)) {
+        if(! req.params.branchId) {
             res.status(HTTP_STATUS.BAD_REQUEST).json({
-                message: "Branch ID must be a number"
+                message: "Branch ID is required"
             });
-        } else {
-            const employees: Employee[] = await employeeService.getEmployeesByBranch(branchId);
-
-            res.status(HTTP_STATUS.OK).json({
-                message: "Employees retrieved successfully",
-                data: employees
-            });
+        } else { 
+            const branchId: number = Number(req.params.branchId);
+    
+            if (isNaN(branchId)) {
+                res.status(HTTP_STATUS.BAD_REQUEST).json({
+                    message: "Branch ID must be a number"
+                });
+            } else {
+                const employees: Employee[] = await employeeService.getEmployeesByBranch(branchId);
+    
+                res.status(HTTP_STATUS.OK).json({
+                    message: "Employees retrieved successfully",
+                    data: employees
+                });
+            }
         }
     } catch (error: unknown) {
         next(error);
@@ -106,14 +112,21 @@ export const getEmployeeByDepartment = async (
     next: NextFunction
 ): Promise<void> => {
     try {
-        const department: string = req.params.department;
+        if(! req.params.department) {
+            res.status(HTTP_STATUS.BAD_REQUEST).json({
+                message: "Department name is required"
+            });
+        } else {
+            const department: string = req.params.department;
+    
+            const employees: Employee[] = await employeeService.getEmployeesByDepartment(department);
+    
+            res.status(HTTP_STATUS.OK).json({
+                message: "Employees retrieved successfully",
+                data: employees
+            });
+        }
 
-        const employees: Employee[] = await employeeService.getEmployeesByDepartment(department);
-
-        res.status(HTTP_STATUS.OK).json({
-            message: "Employees retrieved successfully",
-            data: employees
-        });
     } catch (error: unknown) {
         next(error);
     }
