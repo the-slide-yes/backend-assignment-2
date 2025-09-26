@@ -150,7 +150,7 @@ describe("Employee controller", () => {
             (employeeService.getEmployeesByBranch as jest.Mock).mockReturnValue(mockEmployees);
 
             // Act
-            await employeeController.getEmployeeByBranch(
+            await employeeController.getEmployeesByBranch(
                 mockReq as Request,
                 mockRes as Response,
                 mockNext
@@ -166,7 +166,7 @@ describe("Employee controller", () => {
 
         it("should return bad request when branchId is missing", async () => {
             // Act
-            await employeeController.getEmployeeByBranch(
+            await employeeController.getEmployeesByBranch(
                 mockReq as Request,
                 mockRes as Response,
                 mockNext
@@ -198,7 +198,7 @@ describe("Employee controller", () => {
             (employeeService.getEmployeesByDepartment as jest.Mock).mockReturnValue(mockEmployees);
 
             // Act
-            await employeeController.getEmployeeByDepartment(
+            await employeeController.getEmployeesByDepartment(
                 mockReq as Request,
                 mockRes as Response,
                 mockNext
@@ -214,7 +214,7 @@ describe("Employee controller", () => {
 
         it("should return bad request when department is missing", async () => {
             // Act
-            await employeeController.getEmployeeByDepartment(
+            await employeeController.getEmployeesByDepartment(
                 mockReq as Request,
                 mockRes as Response,
                 mockNext

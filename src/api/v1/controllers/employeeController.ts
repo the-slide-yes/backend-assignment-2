@@ -69,7 +69,7 @@ export const getEmployeeById = async (
  * @param res  - The express Response
  * @param next - The express middleware chaining function
  */
-export const getEmployeeByBranch = async (
+export const getEmployeesByBranch = async (
     req: Request, 
     res: Response, 
     next: NextFunction
@@ -106,7 +106,7 @@ export const getEmployeeByBranch = async (
  * @param res  - The express Response
  * @param next - The express middleware chaining function
  */
-export const getEmployeeByDepartment = async (
+export const getEmployeesByDepartment = async (
     req: Request, 
     res: Response, 
     next: NextFunction

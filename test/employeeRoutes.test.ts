@@ -42,7 +42,7 @@ describe("Employee Routes", () => {
             // Act
             await request(app).get("/api/v1/employees/onBranch/1");
             // Assert
-            expect(employeeController.getEmployeeByBranch).toHaveBeenCalled();
+            expect(employeeController.getEmployeesByBranch).toHaveBeenCalled();
         });
     });
 
@@ -51,7 +51,7 @@ describe("Employee Routes", () => {
             // Act
             await request(app).get("/api/v1/employees/inDepartment/1");
             // Assert
-            expect(employeeController.getEmployeeByDepartment).toHaveBeenCalled();
+            expect(employeeController.getEmployeesByDepartment).toHaveBeenCalled();
         });
     });
 
