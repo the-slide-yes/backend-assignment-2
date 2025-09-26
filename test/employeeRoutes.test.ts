@@ -7,6 +7,8 @@ import { Employee } from "../src/api/v1/models/employeeModel";
 jest.mock("../src/api/v1/controllers/employeeController", () => ({
     getAllEmployees: jest.fn((req, res) => res.status(HTTP_STATUS.OK).send()),
     getEmployeeById: jest.fn((req, res) => res.status(HTTP_STATUS.OK).send()),
+    getEmployeesByBranch: jest.fn((req, res) => res.status(HTTP_STATUS.OK).send()),
+    getEmployeesByDepartment: jest.fn((req, res) => res.status(HTTP_STATUS.OK).send()),
     createEmployee: jest.fn((req, res) => res.status(HTTP_STATUS.CREATED).send()),
     updateEmployee: jest.fn((req, res) => res.status(HTTP_STATUS.OK).send()),
     deleteEmployee: jest.fn((req, res) => res.status(HTTP_STATUS.OK).send()),
@@ -32,6 +34,24 @@ describe("Employee Routes", () => {
             await request(app).get("/api/v1/employees/1");
             // Assert
             expect(employeeController.getEmployeeById).toHaveBeenCalled();
+        });
+    });
+
+    describe("GET /api/vi/employees/onBranch/:branchId", () => {
+        it("should call getEmployeeByBranch controller", async () => {
+            // Act
+            await request(app).get("/api/v1/employees/onBranch/1");
+            // Assert
+            expect(employeeController.getEmployeeByBranch).toHaveBeenCalled();
+        });
+    });
+
+    describe("GET /api/vi/employees/inDepartment/:department", () => {
+        it("should call getEmployeeByDepartment controller", async () => {
+            // Act
+            await request(app).get("/api/v1/employees/inDepartment/1");
+            // Assert
+            expect(employeeController.getEmployeeByDepartment).toHaveBeenCalled();
         });
     });
 
