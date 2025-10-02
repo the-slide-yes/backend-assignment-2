@@ -29,8 +29,9 @@ export const employeeSchemas: Record<string, RequestSchema> = {
                 "any.required": "Phone number is required",
                 "string.empty": "Phone number cannot be empty",
             }),
-            branchId: Joi.number().required().messages({
+            branchId: Joi.string().required().messages({
                 "any.required": "Branch ID is required",
+                "string.empty": "Branch ID cannot be empty",
             }),
         }),
     },
@@ -38,8 +39,9 @@ export const employeeSchemas: Record<string, RequestSchema> = {
     // PUT /api/v1/employees/:id - Update Employee
     update: {
         params: Joi.object({
-            id: Joi.number().required().messages({
+            id: Joi.string().required().messages({
                 "any.required": "Employee ID is required",
+                "string.empty": "Employee ID cannot be empty",
             }),
         }),
         body: Joi.object({
@@ -59,14 +61,18 @@ export const employeeSchemas: Record<string, RequestSchema> = {
             phone: Joi.string().optional().messages({
                 "string.empty": "Phone number cannot be empty",
             }),
+            branchId: Joi.string().optional().messages({
+                "string.empty": "Branch ID cannot be empty",
+            }),
         }),
     },
 
     // GET /api/v1/employees/:id - Get Employee
     getById: {
         params: Joi.object({
-            id: Joi.number().required().messages({
+            id: Joi.string().required().messages({
                 "any.required": "Employee ID is required",
+                "string.empty": "Employee ID cannot be empty",
             }),
         }),
     },
@@ -74,13 +80,14 @@ export const employeeSchemas: Record<string, RequestSchema> = {
     // GET /api/v1/employees/onBranch/:branchId - Get Employee
     getByBranchID: {
         params: Joi.object({
-            branchId: Joi.number().required().messages({
+            branchId: Joi.string().required().messages({
                 "any.required": "Branch ID is required",
+                "string.empty": "Branch ID cannot be empty",
             }),
         }),
     },
 
-    // GET /api/v1/employees/inDepartment/:department - Update Employee
+    // GET /api/v1/employees/inDepartment/:department - Get Employee
     getByDepartment: {
         params: Joi.object({
             department: Joi.string().required().messages({
@@ -90,11 +97,12 @@ export const employeeSchemas: Record<string, RequestSchema> = {
         }),
     },
 
-    // GET /api/v1/employees/:id - Update Employee
+    // DELETE /api/v1/employees/:id - Delete Employee
     delete: {
         params: Joi.object({
-            id: Joi.number().required().messages({
+            id: Joi.string().required().messages({
                 "any.required": "Employee ID is required",
+                "string.empty": "Employee ID cannot be empty",
             }),
         }),
     },

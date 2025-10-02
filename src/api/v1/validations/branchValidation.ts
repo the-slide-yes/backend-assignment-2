@@ -1,0 +1,66 @@
+import Joi from "joi";
+import { RequestSchema } from "../middleware/validate";
+
+/**
+ * Branch schema organised by request type
+ */
+export const branchSchemas: Record<string, RequestSchema> = {
+    // POST /api/v1/branches - Create new Branch
+    create: {
+        body: Joi.object({
+            name: Joi.string().required().messages({
+                "any.required": "Name is required",
+                "string.empty": "Name cannot be empty",
+            }),
+            address: Joi.string().required().messages({
+                "any.required": "Address is required",
+                "string.empty": "Address cannot be empty",
+            }),
+            phone: Joi.string().required().messages({
+                "any.required": "Phone number is required",
+                "string.empty": "Phone number cannot be empty",
+            }),
+        }),
+    },
+
+    // PUT /api/v1/branches/:id - Update Branch
+    update: {
+        params: Joi.object({
+            id: Joi.string().required().messages({
+                "any.required": "Branch ID is required",
+                "string.empty": "Branch ID cannot be empty",
+            }),
+        }),
+        body: Joi.object({
+            name: Joi.string().optional().messages({
+                "string.empty": "Name cannot be empty",
+            }),
+            address: Joi.string().optional().messages({
+                "string.empty": "Address cannot be empty",
+            }),
+            phone: Joi.string().optional().messages({
+                "string.empty": "Phone number cannot be empty",
+            }),
+        }),
+    },
+
+    // GET /api/v1/branches/:id - Get Branch
+    getById: {
+        params: Joi.object({
+            id: Joi.string().required().messages({
+                "any.required": "Branch ID is required",
+                "string.empty": "Branch ID cannot be empty",
+            }),
+        }),
+    },
+
+    // DELETE /api/v1/branches/:id - Delete Branch
+    delete: {
+        params: Joi.object({
+            id: Joi.string().required().messages({
+                "any.required": "Branch ID is required",
+                "string.empty": "Branch ID cannot be empty",
+            }),
+        }),
+    },
+};
