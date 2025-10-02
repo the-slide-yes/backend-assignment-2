@@ -1,5 +1,3 @@
-import request from "supertest";
-import app from "../src/app";
 import * as employeeController from "../src/api/v1/controllers/employeeController";
 import { HTTP_STATUS } from "../src/constants/httpConstants";
 import { Employee } from "../src/api/v1/models/employeeModel";
@@ -56,7 +54,7 @@ describe("Employee controller", () => {
         it("should handle errors", async () => {
             // Arrange
             const mockError: Error = new Error("I AM AN EGG");
-            
+
             (employeeService.getAllEmployees as jest.Mock).mockImplementation(() => {
                 throw mockError;
             });
@@ -114,16 +112,16 @@ describe("Employee controller", () => {
                 email: "chadnotsad@model.roofingcompany.ca",
                 branchId: 3
             };
-            mockReq.params = {id: "Gaming"};
+            mockReq.params = { id: "Gaming" };
             (employeeService.getEmployeeById as jest.Mock).mockReturnValue(mockEmployee);
-            
+
             // Act
             await employeeController.getEmployeeById(
                 mockReq as Request,
                 mockRes as Response,
                 mockNext
             );
-            
+
             // Assert
             expect(mockRes.status).toHaveBeenCalledWith(HTTP_STATUS.BAD_REQUEST);
             expect(mockRes.json).toHaveBeenCalledWith({

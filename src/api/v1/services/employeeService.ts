@@ -1,4 +1,4 @@
-import { Employees } from "../../../data/employees";
+import { employees } from "../../../data/employees";
 import { Employee } from "../models/employeeModel";
 
 /**
@@ -6,7 +6,7 @@ import { Employee } from "../models/employeeModel";
  * @returns An array containing all employees.
  */
 export const getAllEmployees = async (): Promise<Employee[]> => {
-    return structuredClone(Employees);
+    return structuredClone(employees);
 };
 
 /**
@@ -15,13 +15,13 @@ export const getAllEmployees = async (): Promise<Employee[]> => {
  * @returns The employee with the matching ID.
  */
 export const getEmployeeById = async (id: number): Promise<Employee> => {
-    const selectedEmployeeIndex: number = Employees.findIndex((employee: Employee) => employee.id === id);
+    const selectedEmployeeIndex: number = employees.findIndex((employee: Employee) => employee.id === id);
 
     if(selectedEmployeeIndex === -1){
         throw new Error(`Error finding employee: No employee exists with an id of [${id}].`);
     }
 
-    return structuredClone(Employees[selectedEmployeeIndex]);
+    return structuredClone(employees[selectedEmployeeIndex]);
 };
 
 /**
@@ -30,7 +30,7 @@ export const getEmployeeById = async (id: number): Promise<Employee> => {
  * @returns The employees with the matching branch ID.
  */
 export const getEmployeesByBranch = async (branchId: number): Promise<Employee[]> => {
-    const employeesOnBranch: Employee[] = Employees.filter((employee: Employee) => employee.branchId === branchId);
+    const employeesOnBranch: Employee[] = employees.filter((employee: Employee) => employee.branchId === branchId);
 
     return structuredClone(employeesOnBranch);
 };
@@ -41,7 +41,7 @@ export const getEmployeesByBranch = async (branchId: number): Promise<Employee[]
  * @returns The employees with the matching department.
  */
 export const getEmployeesByDepartment = async (department: string): Promise<Employee[]> => {
-    const employeesInDepartment: Employee[] = Employees.filter((employee: Employee) => employee.department === department);
+    const employeesInDepartment: Employee[] = employees.filter((employee: Employee) => employee.department === department);
 
     return structuredClone(employeesInDepartment);
 };
@@ -57,7 +57,7 @@ export const createEmployee = async (employeeData: Omit<Employee, "id">): Promis
         ...employeeData
     };
 
-    Employees.push(newEmployee);
+    employees.push(newEmployee);
 
     return newEmployee;
 };
@@ -77,18 +77,18 @@ export const updateEmployee = async (id: number, employeeData: {
             phone?: string;
             branchId?: number;
         }): Promise<Employee> => {
-    const selectedEmployeeIndex: number = Employees.findIndex((employee: Employee) => employee.id === id);
+    const selectedEmployeeIndex: number = employees.findIndex((employee: Employee) => employee.id === id);
 
     if(selectedEmployeeIndex === -1){
         throw new Error(`Error updating employee: No employee exists with an id of [${id}].`);
     }
 
-    Employees[selectedEmployeeIndex] = {
-        ...Employees[selectedEmployeeIndex],
+    employees[selectedEmployeeIndex] = {
+        ...employees[selectedEmployeeIndex],
         ...employeeData
     };
 
-    return structuredClone(Employees[selectedEmployeeIndex]);
+    return structuredClone(employees[selectedEmployeeIndex]);
 };
 
 /**
@@ -98,13 +98,13 @@ export const updateEmployee = async (id: number, employeeData: {
  * @throws Error if an employee with the given ID is not found.
  */
 export const deleteEmployee = async (id: number): Promise<string> => {
-    const selectedEmployeeIndex: number = Employees.findIndex((employee: Employee) => employee.id === id);
+    const selectedEmployeeIndex: number = employees.findIndex((employee: Employee) => employee.id === id);
 
     if(selectedEmployeeIndex === -1){
         throw new Error(`Error deleting employee: No employee exists with an id of [${id}].`);
     }
     
-    Employees.splice(selectedEmployeeIndex, 1);
+    employees.splice(selectedEmployeeIndex, 1);
 
     return "Employee removed successfully.";
 };

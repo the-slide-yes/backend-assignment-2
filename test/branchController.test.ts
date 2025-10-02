@@ -1,5 +1,3 @@
-import request from "supertest";
-import app from "../src/app";
 import * as branchController from "../src/api/v1/controllers/branchController";
 import { HTTP_STATUS } from "../src/constants/httpConstants";
 import { Branch } from "../src/api/v1/models/branchModel";

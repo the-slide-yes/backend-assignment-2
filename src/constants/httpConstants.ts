@@ -1,7 +1,13 @@
 /**
  * HTTP status codes used throughout the application
  */
-export const HTTP_STATUS = {
+export const HTTP_STATUS: {
+  OK: number,
+  CREATED: number,
+  BAD_REQUEST: number,
+  NOT_FOUND: number,
+  INTERNAL_SERVER_ERROR: number,
+} = {
   // Success responses
   OK: 200,
   CREATED: 201,

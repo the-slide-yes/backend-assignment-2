@@ -1,4 +1,4 @@
-import { Branches } from "../../../data/branches";
+import { branches } from "../../../data/branches";
 import { Branch } from "../models/branchModel";
 
 /**
@@ -6,7 +6,7 @@ import { Branch } from "../models/branchModel";
  * @returns An array containing all branches.
  */
 export const getAllBranches = async (): Promise<Branch[]> => {
-    return structuredClone(Branches);
+    return structuredClone(branches);
 };
 
 /**
@@ -15,13 +15,13 @@ export const getAllBranches = async (): Promise<Branch[]> => {
  * @returns The branch with the matching ID.
  */
 export const getBranchById = async (id: number): Promise<Branch> => {
-    const selectedBranchIndex: number = Branches.findIndex((branch: Branch) => branch.id === id);
+    const selectedBranchIndex: number = branches.findIndex((branch: Branch) => branch.id === id);
 
     if(selectedBranchIndex === -1){
         throw new Error(`Error finding branch: No branch exists with an id of [${id}].`);
     }
 
-    return structuredClone(Branches[selectedBranchIndex]);
+    return structuredClone(branches[selectedBranchIndex]);
 };
 
 /**
@@ -35,7 +35,7 @@ export const createBranch = async (branchData: Omit<Branch, "id">): Promise<Bran
         ...branchData
     };
 
-    Branches.push(newBranch);
+    branches.push(newBranch);
 
     return newBranch;
 };
@@ -52,18 +52,18 @@ export const updateBranch = async (id: number, branchData: {
             address?: string;
             phone?: string;
         }): Promise<Branch> => {
-    const selectedBranchIndex: number = Branches.findIndex((branch: Branch) => branch.id === id);
+    const selectedBranchIndex: number = branches.findIndex((branch: Branch) => branch.id === id);
 
     if(selectedBranchIndex === -1){
         throw new Error(`Error updating branch: No branch exists with an id of [${id}].`);
     }
 
-    Branches[selectedBranchIndex] = {
-        ...Branches[selectedBranchIndex],
+    branches[selectedBranchIndex] = {
+        ...branches[selectedBranchIndex],
         ...branchData
     };
 
-    return structuredClone(Branches[selectedBranchIndex]);
+    return structuredClone(branches[selectedBranchIndex]);
 };
 
 /**
@@ -73,13 +73,13 @@ export const updateBranch = async (id: number, branchData: {
  * @throws Error if a branch with the given ID is not found.
  */
 export const deleteBranch = async (id: number): Promise<string> => {
-    const selectedBranchIndex: number = Branches.findIndex((branch: Branch) => branch.id === id);
+    const selectedBranchIndex: number = branches.findIndex((branch: Branch) => branch.id === id);
 
     if(selectedBranchIndex === -1){
         throw new Error(`Error deleting branch: No branch exists with an id of [${id}].`);
     }
     
-    Branches.splice(selectedBranchIndex, 1);
+    branches.splice(selectedBranchIndex, 1);
 
     return "Branch removed successfully.";
 };
