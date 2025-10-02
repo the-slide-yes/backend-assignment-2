@@ -45,7 +45,7 @@ export const branchSchemas: Record<string, RequestSchema> = {
     },
 
     // GET /api/v1/branches/:id - Get Branch
-    getById: {
+    get: {
         params: Joi.object({
             id: Joi.string().required().messages({
                 "any.required": "Branch ID is required",
