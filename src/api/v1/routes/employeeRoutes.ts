@@ -7,7 +7,7 @@ const router: Router = express.Router();
 
 router.get("/employees", employeeController.getAllEmployees);
 router.get("/employees/:id", validateRequest(employeeSchemas.getById), employeeController.getEmployeeById);
-router.get("/employees/onBranch/:branchId", validateRequest(employeeSchemas.getByBranch), employeeController.getEmployeesByBranch);
+router.get("/employees/onBranch/:branchId", validateRequest(employeeSchemas.getByBranchId), employeeController.getEmployeesByBranch);
 router.get("/employees/inDepartment/:department", validateRequest(employeeSchemas.getByDepartment), employeeController.getEmployeesByDepartment);
 router.post("/employees", validateRequest(employeeSchemas.create), employeeController.createEmployee);
 router.put("/employees/:id", validateRequest(employeeSchemas.update), employeeController.updateEmployee);

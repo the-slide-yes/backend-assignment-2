@@ -78,7 +78,7 @@ export const employeeSchemas: Record<string, RequestSchema> = {
     },
 
     // GET /api/v1/employees/onBranch/:branchId - Get Employee
-    getByBranchID: {
+    getByBranchId: {
         params: Joi.object({
             branchId: Joi.string().required().messages({
                 "any.required": "Branch ID is required",
