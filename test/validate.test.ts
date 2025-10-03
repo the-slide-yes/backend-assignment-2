@@ -3,6 +3,7 @@ import { validateRequest } from "../src/api/v1/middleware/validate";
 import { employeeSchemas } from "../src/api/v1/validations/employeeValidation";
 import { MiddlewareFunction } from "../src/api/v1/types/express";
 import { HTTP_STATUS } from "../src/constants/httpConstants";
+import { branchSchemas } from "../src/api/v1/validations/branchValidation";
 
 describe("Validation Middleware", () => {
     let mockReq: Partial<Request>;
@@ -165,6 +166,95 @@ describe("Validation Middleware", () => {
     });
 
     describe("branchValidation", () => {
+        describe("create", () => {
+            it("should fail validation when name is empty string", () => {
+                // Arrange
+                mockReq.body = {
+                    name: "",
+                    address: "inside a lamp",
+                    phone: "222-222-2222",
+                };
+                const middleware: MiddlewareFunction = validateRequest(
+                    branchSchemas.create
+                );
 
+                // Act
+                middleware(mockReq as Request, mockRes as Response, mockNext);
+
+                // Assert
+                expect(mockNext).not.toHaveBeenCalled();
+                expect(mockRes.status).toHaveBeenCalledWith(HTTP_STATUS.BAD_REQUEST);
+                expect(mockRes.json).toHaveBeenCalledWith({
+                    error: "Validation error: Body: Name cannot be empty",
+                });
+            });
+        });
+
+        describe("update", () => {
+            it("should fail validation when name is empty string", () => {
+                // Arrange
+                mockReq.params = { id: "cone" };
+                mockReq.body = {
+                    name: "",
+                    address: "inside a lamp",
+                    phone: "222-222-2222",
+                };
+                const middleware: MiddlewareFunction = validateRequest(
+                    branchSchemas.update
+                );
+
+                // Act
+                middleware(mockReq as Request, mockRes as Response, mockNext);
+
+                // Assert
+                expect(mockNext).not.toHaveBeenCalled();
+                expect(mockRes.status).toHaveBeenCalledWith(HTTP_STATUS.BAD_REQUEST);
+                expect(mockRes.json).toHaveBeenCalledWith({
+                    error: "Validation error: Body: Name cannot be empty",
+                });
+            });
+        });
+
+        describe("get", () => {
+            it("should fail validation when id is empty string", () => {
+                // Arrange
+                mockReq.params = { id: "" };
+
+                const middleware: MiddlewareFunction = validateRequest(
+                    branchSchemas.get
+                );
+
+                // Act
+                middleware(mockReq as Request, mockRes as Response, mockNext);
+
+                // Assert
+                expect(mockNext).not.toHaveBeenCalled();
+                expect(mockRes.status).toHaveBeenCalledWith(HTTP_STATUS.BAD_REQUEST);
+                expect(mockRes.json).toHaveBeenCalledWith({
+                    error: "Validation error: Params: Branch ID cannot be empty",
+                });
+            });
+        });
+
+        describe("delete", () => {
+            it("should fail validation when id is empty string", () => {
+                // Arrange
+                mockReq.params = { id: "" };
+
+                const middleware: MiddlewareFunction = validateRequest(
+                    branchSchemas.delete
+                );
+
+                // Act
+                middleware(mockReq as Request, mockRes as Response, mockNext);
+
+                // Assert
+                expect(mockNext).not.toHaveBeenCalled();
+                expect(mockRes.status).toHaveBeenCalledWith(HTTP_STATUS.BAD_REQUEST);
+                expect(mockRes.json).toHaveBeenCalledWith({
+                    error: "Validation error: Params: Branch ID cannot be empty",
+                });
+            });
+        });
     });
 });
