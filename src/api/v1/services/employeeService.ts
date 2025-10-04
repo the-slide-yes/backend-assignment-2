@@ -1,5 +1,4 @@
 import { DocumentData, DocumentSnapshot, FieldValue, QuerySnapshot } from "node_modules/firebase-admin/lib/firestore";
-import { employees } from "../../../data/employees";
 import { Employee } from "../models/employeeModel";
 import { createDocument, deleteDocument, getDocumentById, getDocuments, getDocumentsByFieldValues, updateDocument } from "../repositories/firestoreRepository";
 
