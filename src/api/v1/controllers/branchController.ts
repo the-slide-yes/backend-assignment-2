@@ -46,13 +46,7 @@ export const getBranchById = async (
             successResponse(branch, "Branch retrieved successfully")
         );
     } catch (error: unknown) {
-        if ((error as Error).message.startsWith("Error finding branch")) {
-            res.status(HTTP_STATUS.BAD_REQUEST).json(
-                errorResponse("ID doesn't match any existing branch")
-            );
-        } else {
-            next(error);
-        }
+        next(error);
     }
 };
 
@@ -106,13 +100,7 @@ export const updateBranch = async (
             successResponse(updatedBranch, "Branch updated successfully")
         );
     } catch (error: unknown) {
-        if ((error as Error).message.startsWith("Error updating branch")) {
-            res.status(HTTP_STATUS.BAD_REQUEST).json(
-                errorResponse("ID doesn't match any existing branch")
-            );
-        } else {
-            next(error);
-        }
+        next(error);
     }
 };
 
@@ -136,12 +124,6 @@ export const deleteBranch = async (
             successResponse(confirmationMessage)
         );
     } catch (error: unknown) {
-        if ((error as Error).message.startsWith("Error deleting branch")) {
-            res.status(HTTP_STATUS.BAD_REQUEST).json(
-                errorResponse("ID doesn't match any existing branch")
-            );
-        } else {
-            next(error)
-        }
+        next(error);
     }
 };

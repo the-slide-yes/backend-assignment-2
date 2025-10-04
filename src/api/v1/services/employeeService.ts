@@ -1,12 +1,30 @@
+import { DocumentData, DocumentSnapshot, FieldValue, QuerySnapshot } from "node_modules/firebase-admin/lib/firestore";
 import { employees } from "../../../data/employees";
 import { Employee } from "../models/employeeModel";
+import { createDocument, deleteDocument, getDocumentById, getDocuments, getDocumentsByFieldValues, updateDocument } from "../repositories/firestoreRepository";
+
+const COLLECTION: string = "employees";
 
 /**
  * Gets all employees.
  * @returns An array containing all employees.
  */
 export const getAllEmployees = async (): Promise<Employee[]> => {
-    return structuredClone(employees);
+    try {
+        const snapshot: QuerySnapshot = await getDocuments(COLLECTION);
+
+        const employees: Employee[] = snapshot.docs.map((doc) => {
+            const data: DocumentData = doc.data();
+            return {
+                id: doc.id,
+                ...data,
+            } as Employee;
+        });
+
+        return employees;
+    } catch (error: unknown) {
+        throw error;
+    }
 };
 
 /**
@@ -14,14 +32,21 @@ export const getAllEmployees = async (): Promise<Employee[]> => {
  * @param id - The ID of the intended employee.
  * @returns The employee with the matching ID.
  */
-export const getEmployeeById = async (id: number): Promise<Employee> => {
-    const selectedEmployeeIndex: number = employees.findIndex((employee: Employee) => employee.id === id);
+export const getEmployeeById = async (id: string): Promise<Employee> => {
+    const doc: DocumentSnapshot | null = await getDocumentById(COLLECTION, id);
 
-    if(selectedEmployeeIndex === -1){
-        throw new Error(`Error finding employee: No employee exists with an id of [${id}].`);
+    if (!doc) {
+        throw new Error(`Employee with ID ${id} not found`);
     }
 
-    return structuredClone(employees[selectedEmployeeIndex]);
+    const data: DocumentData | undefined = doc.data();
+
+    const employee: Employee = {
+        id: doc.id,
+        ...data,
+    } as Employee;
+
+    return structuredClone(employee);
 };
 
 /**
@@ -29,10 +54,26 @@ export const getEmployeeById = async (id: number): Promise<Employee> => {
  * @param branchId - The branch ID of the intended employee.
  * @returns The employees with the matching branch ID.
  */
-export const getEmployeesByBranch = async (branchId: number): Promise<Employee[]> => {
-    const employeesOnBranch: Employee[] = employees.filter((employee: Employee) => employee.branchId === branchId);
+export const getEmployeesByBranch = async (branchId: string): Promise<Employee[]> => {
+    try {
+        const snapshot: QuerySnapshot = await getDocumentsByFieldValues(COLLECTION, [{
+            fieldName: "branchId",
+            fieldValue: branchId
+        }]);
 
-    return structuredClone(employeesOnBranch);
+        const employees: Employee[] = snapshot.docs.map((doc) => {
+            const data: DocumentData = doc.data();
+
+            return {
+                id: doc.id,
+                ...data,
+            } as Employee;
+        });
+
+        return employees;
+    } catch (error: unknown) {
+        throw error;
+    }
 };
 
 /**
@@ -41,9 +82,25 @@ export const getEmployeesByBranch = async (branchId: number): Promise<Employee[]
  * @returns The employees with the matching department.
  */
 export const getEmployeesByDepartment = async (department: string): Promise<Employee[]> => {
-    const employeesInDepartment: Employee[] = employees.filter((employee: Employee) => employee.department === department);
+    try {
+        const snapshot: QuerySnapshot = await getDocumentsByFieldValues(COLLECTION, [{
+            fieldName: "department",
+            fieldValue: department
+        }]);
 
-    return structuredClone(employeesInDepartment);
+        const employees: Employee[] = snapshot.docs.map((doc) => {
+            const data: DocumentData = doc.data();
+
+            return {
+                id: doc.id,
+                ...data,
+            } as Employee;
+        });
+
+        return employees;
+    } catch (error: unknown) {
+        throw error;
+    }
 };
 
 /**
@@ -52,14 +109,9 @@ export const getEmployeesByDepartment = async (department: string): Promise<Empl
  * @returns The created employee.
  */
 export const createEmployee = async (employeeData: Omit<Employee, "id">): Promise<Employee> => {
-    const newEmployee: Employee = {
-        id: Date.now(),
-        ...employeeData
-    };
+    const employeeId: string = await createDocument<Employee>(COLLECTION, employeeData);
 
-    employees.push(newEmployee);
-
-    return newEmployee;
+    return structuredClone({ id: employeeId, ...employeeData } as Employee);
 };
 
 /**
@@ -69,26 +121,28 @@ export const createEmployee = async (employeeData: Omit<Employee, "id">): Promis
  * @returns The updated employee.
  * @throws Error if an employee with the given ID is not found.
  */
-export const updateEmployee = async (id: number, employeeData: {
-            name?: string;
-            position?: string;
-            department?: string;
-            email?: string;
-            phone?: string;
-            branchId?: number;
-        }): Promise<Employee> => {
-    const selectedEmployeeIndex: number = employees.findIndex((employee: Employee) => employee.id === id);
+export const updateEmployee = async (id: string, employeeData: {
+    name?: string;
+    position?: string;
+    department?: string;
+    email?: string;
+    phone?: string;
+    branchId?: string;
+}): Promise<Employee> => {
+    try {
+        const employee: Employee = await getEmployeeById(id);
 
-    if(selectedEmployeeIndex === -1){
-        throw new Error(`Error updating employee: No employee exists with an id of [${id}].`);
+        const updateEmployee: Employee = {
+            ...employee,
+            ...employeeData
+        };
+
+        await updateDocument<Employee>(COLLECTION, id, updateEmployee);
+
+        return structuredClone(updateEmployee);
+    } catch (error: unknown) {
+        throw error;
     }
-
-    employees[selectedEmployeeIndex] = {
-        ...employees[selectedEmployeeIndex],
-        ...employeeData
-    };
-
-    return structuredClone(employees[selectedEmployeeIndex]);
 };
 
 /**
@@ -97,14 +151,14 @@ export const updateEmployee = async (id: number, employeeData: {
  * @returns A message confirming the employee was successfully deleted.
  * @throws Error if an employee with the given ID is not found.
  */
-export const deleteEmployee = async (id: number): Promise<string> => {
-    const selectedEmployeeIndex: number = employees.findIndex((employee: Employee) => employee.id === id);
+export const deleteEmployee = async (id: string): Promise<string> => {
+    try {
+        const employee: Employee = await getEmployeeById(id);
 
-    if(selectedEmployeeIndex === -1){
-        throw new Error(`Error deleting employee: No employee exists with an id of [${id}].`);
+        await deleteDocument(COLLECTION, id);
+
+        return "Employee deleted successfully";
+    } catch (error: unknown) {
+        throw error;
     }
-    
-    employees.splice(selectedEmployeeIndex, 1);
-
-    return "Employee removed successfully.";
 };

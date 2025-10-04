@@ -46,13 +46,7 @@ export const getEmployeeById = async (
             successResponse(employee, "Employee retrieved successfully")
         );
     } catch (error: unknown) {
-        if ((error as Error).message.startsWith("Error finding employee")) {
-            res.status(HTTP_STATUS.BAD_REQUEST).json(
-                errorResponse("ID doesn't match any existing employee")
-            );
-        } else {
-            next(error);
-        }
+        next(error);
     }
 };
 
@@ -146,7 +140,7 @@ export const updateEmployee = async (
             department?: string;
             email?: string;
             phone?: string;
-            branchId?: number;
+            branchId?: string;
         } = req.body;
 
         const id: string = req.params.id;
@@ -157,13 +151,7 @@ export const updateEmployee = async (
             successResponse(updatedEmployee, "Employee updated successfully")
         );
     } catch (error: unknown) {
-        if ((error as Error).message.startsWith("Error updating employee")) {
-            res.status(HTTP_STATUS.BAD_REQUEST).json(
-                errorResponse("ID doesn't match any existing employee")
-            );
-        } else {
-            next(error);
-        }
+        next(error);
     }
 };
 
@@ -187,12 +175,6 @@ export const deleteEmployee = async (
             successResponse(confirmationMessage)
         );
     } catch (error: unknown) {
-        if ((error as Error).message.startsWith("Error deleting employee")) {
-            res.status(HTTP_STATUS.BAD_REQUEST).json(
-                errorResponse("ID doesn't match any existing employee")
-            );
-        } else {
-            next(error)
-        }
+        next(error);
     }
 };
