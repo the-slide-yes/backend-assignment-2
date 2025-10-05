@@ -1,7 +1,7 @@
 import * as branchService from "../src/api/v1/services/branchService";
 import * as firestoreRepository from "../src/api/v1/repositories/firestoreRepository";
 import { Branch } from "../src/api/v1/models/branchModel";
-import { DocumentData, DocumentSnapshot, QueryDocumentSnapshot, QuerySnapshot } from "node_modules/firebase-admin/lib/firestore";
+import { DocumentData } from "node_modules/firebase-admin/lib/firestore";
 
 // Mock the repository module
 // jest.mock replaces the entire module with an auto-mocked version
@@ -32,7 +32,7 @@ describe("Branch Service", () => {
                 {
                     docs: [{
                         id: mockBranch.id,
-                        data: () => mockBranchData,
+                        data: (): DocumentData => mockBranchData,
                     }]
                 }
             );

@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import * as employeeService from "../services/employeeService";
 import { Employee } from "../models/employeeModel";
 import { HTTP_STATUS } from "../../../constants/httpConstants";
-import { errorResponse, successResponse } from "../models/responseModel";
+import { successResponse } from "../models/responseModel";
 
 /**
  * Manages requests and reponses to retrieve all Employees

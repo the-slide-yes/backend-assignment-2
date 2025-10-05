@@ -1,7 +1,7 @@
 import * as employeeService from "../src/api/v1/services/employeeService";
 import * as firestoreRepository from "../src/api/v1/repositories/firestoreRepository";
 import { Employee } from "../src/api/v1/models/employeeModel";
-import { DocumentData, DocumentSnapshot, QueryDocumentSnapshot, QuerySnapshot } from "node_modules/firebase-admin/lib/firestore";
+import { DocumentData } from "node_modules/firebase-admin/lib/firestore";
 
 // Mock the repository module
 // jest.mock replaces the entire module with an auto-mocked version
@@ -35,7 +35,7 @@ describe("Employee Service", () => {
                 {
                     docs: [{
                         id: mockEmployee.id,
-                        data: () => mockEmployeeData,
+                        data: (): DocumentData => mockEmployeeData,
                     }]
                 }
             );
@@ -64,7 +64,7 @@ describe("Employee Service", () => {
                 {
                     docs: [{
                         id: mockEmployee.id,
-                        data: () => mockEmployeeData,
+                        data: (): DocumentData => mockEmployeeData,
                     }]
                 }
             );
@@ -99,7 +99,7 @@ describe("Employee Service", () => {
                 {
                     docs: [{
                         id: mockEmployee.id,
-                        data: () => mockEmployeeData,
+                        data: (): DocumentData => mockEmployeeData,
                     }]
                 }
             );
@@ -133,7 +133,7 @@ describe("Employee Service", () => {
             (firestoreRepository.getDocumentById as jest.Mock).mockResolvedValue(
                 {
                     id: mockDocumentId,
-                    data: () => mockEmployeeData,
+                    data: (): DocumentData => mockEmployeeData,
                 }
             );
 

@@ -1,6 +1,6 @@
-import { DocumentData, DocumentSnapshot, FieldValue, QuerySnapshot } from "node_modules/firebase-admin/lib/firestore";
+import { DocumentData, DocumentSnapshot, QuerySnapshot } from "node_modules/firebase-admin/lib/firestore";
 import { Branch } from "../models/branchModel";
-import { createDocument, deleteDocument, getDocumentById, getDocuments, getDocumentsByFieldValues, updateDocument } from "../repositories/firestoreRepository";
+import { createDocument, deleteDocument, getDocumentById, getDocuments, updateDocument } from "../repositories/firestoreRepository";
 
 const COLLECTION: string = "branches";
 
@@ -96,7 +96,7 @@ export const updateBranch = async (id: string, branchData: {
  */
 export const deleteBranch = async (id: string): Promise<string> => {
     try {
-        const branch: Branch = await getBranchById(id);
+        await getBranchById(id);
 
         await deleteDocument(COLLECTION, id);
 

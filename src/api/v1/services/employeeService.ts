@@ -1,4 +1,4 @@
-import { DocumentData, DocumentSnapshot, FieldValue, QuerySnapshot } from "node_modules/firebase-admin/lib/firestore";
+import { DocumentData, DocumentSnapshot, QuerySnapshot } from "node_modules/firebase-admin/lib/firestore";
 import { Employee } from "../models/employeeModel";
 import { createDocument, deleteDocument, getDocumentById, getDocuments, getDocumentsByFieldValues, updateDocument } from "../repositories/firestoreRepository";
 
@@ -153,7 +153,7 @@ export const updateEmployee = async (id: string, employeeData: {
  */
 export const deleteEmployee = async (id: string): Promise<string> => {
     try {
-        const employee: Employee = await getEmployeeById(id);
+        await getEmployeeById(id);
 
         await deleteDocument(COLLECTION, id);
 
