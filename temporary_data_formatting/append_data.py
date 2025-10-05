@@ -1,20 +1,31 @@
 import requests
 
 API_URL = "http://localhost:3000/api/v1"
+"""The url of the api."""
 
 def post_employee(employee: object):
-    res = requests.post(
+    """Posts an employee to the api."""
+
+    requests.post(
         url=f"{API_URL}/employees",
         json=employee
     )
 
 def post_branch(branch: object):
-    res = requests.post(
+    """Posts a branch to the api."""
+
+    requests.post(
         url=f"{API_URL}/branches",
         json=branch
     )
 
 def to_employee_json(line: str) -> object:
+    """Converts a row from the table copied from learn into a json object.
+    
+    Returns:
+        The JSON representation of the row.
+    """
+
     items = line.strip().split("\t")
 
     return {
@@ -27,6 +38,12 @@ def to_employee_json(line: str) -> object:
         }
 
 def to_branch_json(line: str) -> object:
+    """Converts a row from the table copied from learn into a json object.
+    
+    Returns:
+        The JSON representation of the row.
+    """
+
     items = line.strip().split("\t")
 
     return {
@@ -36,6 +53,13 @@ def to_branch_json(line: str) -> object:
         }
 
 def post_file(file_path: str, post, to_json):
+    """Posts all rows of a text file through a post function.
+    
+    Args:
+        file_path (str): The path to the file to be used.
+        post: The post function which posts each row.
+        to_json: The conversion function from row string to json object.
+    """
     with open(file_path, 'r') as file:
         _ = file.readline()
 
@@ -43,5 +67,5 @@ def post_file(file_path: str, post, to_json):
             post(to_json(row))
 
 
-post_file("temporary_data_formatting/branchesRaw.txt", post_branch, to_branch_json)
-post_file("temporary_data_formatting/employeesRaw.txt", post_employee, to_employee_json)
+post_file("temporary_data_formatting/branches.txt", post_branch, to_branch_json)
+post_file("temporary_data_formatting/employees.txt", post_employee, to_employee_json)
