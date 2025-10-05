@@ -100,7 +100,7 @@ describe("Employee controller", () => {
                 },
             ];
             mockReq.params = { branchId: "3" };
-            (employeeService.getEmployeesByBranch as jest.Mock).mockReturnValue(mockEmployees);
+            (employeeService.getEmployeesByBranchId as jest.Mock).mockReturnValue(mockEmployees);
 
             // Act
             await employeeController.getEmployeesByBranch(

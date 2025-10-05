@@ -53,7 +53,7 @@ export const getEmployeeById = async (id: string): Promise<Employee> => {
  * @param branchId - The branch ID of the intended employee.
  * @returns The employees with the matching branch ID.
  */
-export const getEmployeesByBranch = async (branchId: string): Promise<Employee[]> => {
+export const getEmployeesByBranchId = async (branchId: string): Promise<Employee[]> => {
     try {
         const snapshot: QuerySnapshot = await getDocumentsByFieldValues(COLLECTION, [{
             fieldName: "branchId",

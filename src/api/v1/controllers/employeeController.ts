@@ -64,7 +64,7 @@ export const getEmployeesByBranch = async (
     try {
         const branchId: string = req.params.branchId;
 
-        const employees: Employee[] = await employeeService.getEmployeesByBranch(branchId);
+        const employees: Employee[] = await employeeService.getEmployeesByBranchId(branchId);
 
         res.status(HTTP_STATUS.OK).json(
             successResponse(employees, "Employees retrieved successfully")
