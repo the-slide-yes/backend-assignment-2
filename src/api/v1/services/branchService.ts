@@ -30,6 +30,7 @@ export const getAllBranches = async (): Promise<Branch[]> => {
  * Gets the branch with the specified ID.
  * @param id - The ID of the intended branch.
  * @returns The branch with the matching ID.
+ * @throws Error if a branch with the given ID is not found.
  */
 export const getBranchById = async (id: string): Promise<Branch> => {
     const doc: DocumentSnapshot | null = await getDocumentById(COLLECTION, id);

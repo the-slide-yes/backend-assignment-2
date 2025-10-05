@@ -1,3 +1,6 @@
+/**
+ * Interface representing an employee of a buisiness company.
+ */
 export interface Employee {
     id: string,
     name: string,

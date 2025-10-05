@@ -30,6 +30,7 @@ export const getAllEmployees = async (): Promise<Employee[]> => {
  * Gets the employee with the specified ID.
  * @param id - The ID of the intended employee.
  * @returns The employee with the matching ID.
+ * @throws Error if an employee with the given ID is not found.
  */
 export const getEmployeeById = async (id: string): Promise<Employee> => {
     const doc: DocumentSnapshot | null = await getDocumentById(COLLECTION, id);
