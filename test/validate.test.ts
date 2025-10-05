@@ -49,6 +49,24 @@ describe("Validation Middleware", () => {
                     error: "Validation error: Body: Name cannot be empty",
                 });
             });
+
+            it("should fail validation when body is undefined", () => {
+                // Arrange
+                mockReq.body = undefined;
+                const middleware: MiddlewareFunction = validateRequest(
+                    employeeSchemas.create
+                );
+
+                // Act
+                middleware(mockReq as Request, mockRes as Response, mockNext);
+
+                // Assert
+                expect(mockNext).not.toHaveBeenCalled();
+                expect(mockRes.status).toHaveBeenCalledWith(HTTP_STATUS.BAD_REQUEST);
+                expect(mockRes.json).toHaveBeenCalledWith({
+                    error: "Validation error: Body: Body is required",
+                });
+            });
         });
 
         describe("update", () => {

@@ -9,6 +9,8 @@ const app: Express = express();
 // Use morgan for HTTP request logging
 app.use(morgan("combined"));
 
+app.use(express.json());
+
 // Define a route
 app.get("/", (req, res) => {
     res.send("Hello, World!");

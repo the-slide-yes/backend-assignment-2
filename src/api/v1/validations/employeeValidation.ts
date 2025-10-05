@@ -33,6 +33,8 @@ export const employeeSchemas: Record<string, RequestSchema> = {
                 "any.required": "Branch ID is required",
                 "string.empty": "Branch ID cannot be empty",
             }),
+        }).required().messages({
+            "any.required": "Body is required",
         }),
     },
 
@@ -43,6 +45,8 @@ export const employeeSchemas: Record<string, RequestSchema> = {
                 "any.required": "Employee ID is required",
                 "string.empty": "Employee ID cannot be empty",
             }),
+        }).required().messages({
+            "any.required": "Params is required",
         }),
         body: Joi.object({
             name: Joi.string().optional().messages({
@@ -64,6 +68,8 @@ export const employeeSchemas: Record<string, RequestSchema> = {
             branchId: Joi.string().optional().messages({
                 "string.empty": "Branch ID cannot be empty",
             }),
+        }).required().messages({
+            "any.required": "Body is required",
         }),
     },
 
@@ -74,6 +80,8 @@ export const employeeSchemas: Record<string, RequestSchema> = {
                 "any.required": "Employee ID is required",
                 "string.empty": "Employee ID cannot be empty",
             }),
+        }).required().messages({
+            "any.required": "Params is required",
         }),
     },
 
@@ -84,6 +92,8 @@ export const employeeSchemas: Record<string, RequestSchema> = {
                 "any.required": "Branch ID is required",
                 "string.empty": "Branch ID cannot be empty",
             }),
+        }).required().messages({
+            "any.required": "Params is required",
         }),
     },
 
@@ -94,6 +104,8 @@ export const employeeSchemas: Record<string, RequestSchema> = {
                 "any.required": "Department is required",
                 "string.empty": "Department cannot be empty",
             }),
+        }).required().messages({
+            "any.required": "Params is required",
         }),
     },
 
@@ -104,6 +116,8 @@ export const employeeSchemas: Record<string, RequestSchema> = {
                 "any.required": "Employee ID is required",
                 "string.empty": "Employee ID cannot be empty",
             }),
+        }).required().messages({
+            "any.required": "Params is required",
         }),
     },
 };

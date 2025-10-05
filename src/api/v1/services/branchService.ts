@@ -50,7 +50,7 @@ export const getBranchById = async (id: string): Promise<Branch> => {
 
 /**
  * Creates a new branch.
- * @param branchData - Only the fields needed to create an branch.
+ * @param branchData - Only the fields needed to create a branch.
  * @returns The created branch.
  */
 export const createBranch = async (branchData: Omit<Branch, "id">): Promise<Branch> => {
@@ -64,7 +64,7 @@ export const createBranch = async (branchData: Omit<Branch, "id">): Promise<Bran
  * @param id The ID of the branch intended to be updated.
  * @param branchData - Only fields that can be updated.
  * @returns The updated branch.
- * @throws Error if an branch with the given ID is not found.
+ * @throws Error if a branch with the given ID is not found.
  */
 export const updateBranch = async (id: string, branchData: {
     name?: string;
@@ -88,10 +88,10 @@ export const updateBranch = async (id: string, branchData: {
 };
 
 /**
- * Removes an branch.
+ * Removes a branch.
  * @param id The ID of the branch intended to be removed.
  * @returns A message confirming the branch was successfully deleted.
- * @throws Error if an branch with the given ID is not found.
+ * @throws Error if a branch with the given ID is not found.
  */
 export const deleteBranch = async (id: string): Promise<string> => {
     try {

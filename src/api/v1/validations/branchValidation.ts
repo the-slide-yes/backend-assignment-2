@@ -20,6 +20,8 @@ export const branchSchemas: Record<string, RequestSchema> = {
                 "any.required": "Phone number is required",
                 "string.empty": "Phone number cannot be empty",
             }),
+        }).required().messages({
+            "any.required": "Body is required",
         }),
     },
 
@@ -30,6 +32,8 @@ export const branchSchemas: Record<string, RequestSchema> = {
                 "any.required": "Branch ID is required",
                 "string.empty": "Branch ID cannot be empty",
             }),
+        }).required().messages({
+            "any.required": "Params is required",
         }),
         body: Joi.object({
             name: Joi.string().optional().messages({
@@ -41,6 +45,8 @@ export const branchSchemas: Record<string, RequestSchema> = {
             phone: Joi.string().optional().messages({
                 "string.empty": "Phone number cannot be empty",
             }),
+        }).required().messages({
+            "any.required": "Body is required",
         }),
     },
 
@@ -51,6 +57,8 @@ export const branchSchemas: Record<string, RequestSchema> = {
                 "any.required": "Branch ID is required",
                 "string.empty": "Branch ID cannot be empty",
             }),
+        }).required().messages({
+            "any.required": "Params is required",
         }),
     },
 
@@ -61,6 +69,8 @@ export const branchSchemas: Record<string, RequestSchema> = {
                 "any.required": "Branch ID is required",
                 "string.empty": "Branch ID cannot be empty",
             }),
+        }).required().messages({
+            "any.required": "Params is required",
         }),
     },
 };
