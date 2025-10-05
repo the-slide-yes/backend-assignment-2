@@ -9,6 +9,8 @@ const app: Express = express();
 // Use morgan for HTTP request logging
 app.use(morgan("combined"));
 
+// This allows the api request to have a body that exists
+// Without this, req.body will be undefined
 app.use(express.json());
 
 // Define a route
