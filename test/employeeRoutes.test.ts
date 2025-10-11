@@ -27,7 +27,7 @@ describe("Employee Routes", () => {
             expect(employeeController.getAllEmployees).toHaveBeenCalled();
         });
     });
-    
+
     describe("GET /api/vi/employees/:id", () => {
         it("should call getEmployeeById controller", async () => {
             // Act
@@ -64,7 +64,7 @@ describe("Employee Routes", () => {
                 position: "Model",
                 phone: "204-222-2222",
                 email: "chadnotsad@model.roofingcompany.ca",
-                branchId: 3
+                branchId: "3"
             };
             // Act
             await request(app).post("/api/v1/employees").send(mockEmployee);
@@ -82,7 +82,7 @@ describe("Employee Routes", () => {
                 position: "Model",
                 phone: "204-222-2222",
                 email: "chadnotsad@model.roofingcompany.ca",
-                branchId: 3
+                branchId: "3"
             };
             // Act
             await request(app).put("/api/v1/employees/1").send(mockEmployee);

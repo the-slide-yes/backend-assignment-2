@@ -1,27 +1,52 @@
-import { Branches } from "../../../data/branches";
+import { DocumentData, DocumentSnapshot, QuerySnapshot } from "node_modules/firebase-admin/lib/firestore";
 import { Branch } from "../models/branchModel";
+import { createDocument, deleteDocument, getDocumentById, getDocuments, updateDocument } from "../repositories/firestoreRepository";
+
+const COLLECTION: string = "branches";
 
 /**
  * Gets all branches.
  * @returns An array containing all branches.
  */
 export const getAllBranches = async (): Promise<Branch[]> => {
-    return structuredClone(Branches);
+    try {
+        const snapshot: QuerySnapshot = await getDocuments(COLLECTION);
+
+        const branches: Branch[] = snapshot.docs.map((doc) => {
+            const data: DocumentData = doc.data();
+            return {
+                id: doc.id,
+                ...data,
+            } as Branch;
+        });
+
+        return branches;
+    } catch (error: unknown) {
+        throw error;
+    }
 };
 
 /**
  * Gets the branch with the specified ID.
  * @param id - The ID of the intended branch.
  * @returns The branch with the matching ID.
+ * @throws Error if a branch with the given ID is not found.
  */
-export const getBranchById = async (id: number): Promise<Branch> => {
-    const selectedBranchIndex: number = Branches.findIndex((branch: Branch) => branch.id === id);
+export const getBranchById = async (id: string): Promise<Branch> => {
+    const doc: DocumentSnapshot | null = await getDocumentById(COLLECTION, id);
 
-    if(selectedBranchIndex === -1){
-        throw new Error(`Error finding branch: No branch exists with an id of [${id}].`);
+    if (!doc) {
+        throw new Error(`Branch with ID ${id} not found`);
     }
 
-    return structuredClone(Branches[selectedBranchIndex]);
+    const data: DocumentData | undefined = doc.data();
+
+    const branch: Branch = {
+        id: doc.id,
+        ...data,
+    } as Branch;
+
+    return structuredClone(branch);
 };
 
 /**
@@ -30,14 +55,9 @@ export const getBranchById = async (id: number): Promise<Branch> => {
  * @returns The created branch.
  */
 export const createBranch = async (branchData: Omit<Branch, "id">): Promise<Branch> => {
-    const newBranch: Branch = {
-        id: Date.now(),
-        ...branchData
-    };
+    const branchId: string = await createDocument<Branch>(COLLECTION, branchData);
 
-    Branches.push(newBranch);
-
-    return newBranch;
+    return structuredClone({ id: branchId, ...branchData } as Branch);
 };
 
 /**
@@ -47,23 +67,25 @@ export const createBranch = async (branchData: Omit<Branch, "id">): Promise<Bran
  * @returns The updated branch.
  * @throws Error if a branch with the given ID is not found.
  */
-export const updateBranch = async (id: number, branchData: {
-            name?: string;
-            address?: string;
-            phone?: string;
-        }): Promise<Branch> => {
-    const selectedBranchIndex: number = Branches.findIndex((branch: Branch) => branch.id === id);
+export const updateBranch = async (id: string, branchData: {
+    name?: string;
+    address?: string;
+    phone?: string;
+}): Promise<Branch> => {
+    try {
+        const branch: Branch = await getBranchById(id);
 
-    if(selectedBranchIndex === -1){
-        throw new Error(`Error updating branch: No branch exists with an id of [${id}].`);
+        const updateBranch: Branch = {
+            ...branch,
+            ...branchData
+        };
+
+        await updateDocument<Branch>(COLLECTION, id, updateBranch);
+
+        return structuredClone(updateBranch);
+    } catch (error: unknown) {
+        throw error;
     }
-
-    Branches[selectedBranchIndex] = {
-        ...Branches[selectedBranchIndex],
-        ...branchData
-    };
-
-    return structuredClone(Branches[selectedBranchIndex]);
 };
 
 /**
@@ -72,14 +94,14 @@ export const updateBranch = async (id: number, branchData: {
  * @returns A message confirming the branch was successfully deleted.
  * @throws Error if a branch with the given ID is not found.
  */
-export const deleteBranch = async (id: number): Promise<string> => {
-    const selectedBranchIndex: number = Branches.findIndex((branch: Branch) => branch.id === id);
+export const deleteBranch = async (id: string): Promise<string> => {
+    try {
+        await getBranchById(id);
 
-    if(selectedBranchIndex === -1){
-        throw new Error(`Error deleting branch: No branch exists with an id of [${id}].`);
+        await deleteDocument(COLLECTION, id);
+
+        return "Branch deleted successfully";
+    } catch (error: unknown) {
+        throw error;
     }
-    
-    Branches.splice(selectedBranchIndex, 1);
-
-    return "Branch removed successfully.";
 };
