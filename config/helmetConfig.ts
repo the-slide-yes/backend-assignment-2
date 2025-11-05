@@ -1,4 +1,3 @@
-// config/helmetConfig.ts - Recommended starter configuration
 import { HelmetOptions } from "helmet";
 
 export const getHelmetConfig: () => HelmetOptions = (): HelmetOptions => {
@@ -22,7 +21,7 @@ export const getHelmetConfig: () => HelmetOptions = (): HelmetOptions => {
         } as HelmetOptions;
     }
 
-    // Production gets full security
+    // Production
     return {
         ...baseConfig,
         hsts: {
