@@ -9,6 +9,7 @@ dotenv.config();
 
 import { getHelmetConfig } from "../config/helmetConfig";
 import { getCorsConfig } from "../config/corsConfig";
+import setupSwagger from "../config/swagger";
 
 import employeeRoutes from "./api/v1/routes/employeeRoutes";
 import branchRoutes from "./api/v1/routes/branchRoutes";
@@ -44,5 +45,7 @@ app.get("/api/v1/health", (req, res) => {
         version: "1.0.0",
     });
 });
+
+setupSwagger(app);
 
 export default app;
