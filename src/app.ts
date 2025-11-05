@@ -1,5 +1,10 @@
 import express, { Express } from "express";
 import morgan from "morgan";
+
+import dotenv from "dotenv";
+
+dotenv.config();
+
 import employeeRoutes from "./api/v1/routes/employeeRoutes";
 import branchRoutes from "./api/v1/routes/branchRoutes";
 
