@@ -18,20 +18,6 @@ const swaggerOptions: swaggerJsdoc.Options = {
                 description: process.env.NODE_ENV,
             },
         ],
-        components: {
-            securitySchemes: {
-                bearerAuth: {
-                    type: "http",
-                    scheme: "bearer",
-                    bearerFormat: "JWT",
-                },
-            },
-        },
-        security: [
-            {
-                bearerAuth: [],
-            },
-        ],
     },
     // Path to the API docs and schemas
     apis: ["./src/api/v1/routes/*.ts", "./src/api/v1/validations/*.ts"],

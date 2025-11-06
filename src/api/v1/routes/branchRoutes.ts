@@ -18,7 +18,7 @@ const router: Router = express.Router();
  *           application/json:
  *             schema:
  *               type: array
- *               branchs:
+ *               branches:
  *                 $ref: '#/components/schemas/Branch'
  */
 router.get("/branches", branchController.getAllBranches);

@@ -18,7 +18,7 @@ import { RequestSchema } from "../middleware/validate";
  *       properties:
  *         id:
  *           type: string
- *           description: The unique identifier for a Employee
+ *           description: The unique identifier for an Employee
  *           example: "G5gRYX36bllXVjaY6ESh"
  *         name:
  *           type: string

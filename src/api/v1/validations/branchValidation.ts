@@ -10,7 +10,7 @@ import { RequestSchema } from "../middleware/validate";
  *       required:
  *         - id
  *         - name
- *         - adress
+ *         - address
  *         - phone
  *       properties:
  *         id:
