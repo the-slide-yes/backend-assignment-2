@@ -2,6 +2,52 @@ import Joi from "joi";
 import { RequestSchema } from "../middleware/validate";
 
 /**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Employee:
+ *       type: object
+ *       required:
+ *         - id
+ *         - name
+ *         - potition
+ *         - department
+ *         - email
+ *         - phone
+ *         - branchId
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: The unique identifier for a Employee
+ *           example: "G5gRYX36bllXVjaY6ESh"
+ *         name:
+ *           type: string
+ *           description: The name of the Employee
+ *           example: "Dave"
+ *         position:
+ *           type: string
+ *           description: The job position of the Employee
+ *           example: "Salesperson"
+ *         department:
+ *           type: string
+ *           description: The department of the Employee
+ *           example: "Sales"
+ *         email:
+ *           type: string
+ *           format: email
+ *           description: The work email of the Employee
+ *           example: "dave.henry@sadcompany.com"
+ *         phone:
+ *           type: string
+ *           description: The mobile phone number of the Employee
+ *           example: "222-222-2222"
+ *         branchId:
+ *           type: string
+ *           description: The ID of the Branch of the Employee
+ *           example: "363153325754"
+ */
+
+/**
  * Employee schema organised by request type
  */
 export const employeeSchemas: Record<string, RequestSchema> = {
