@@ -1,4 +1,6 @@
 node_modules/
 dist/
 
-i-don-t-like-this-a497b-firebase-adminsdk-fbsvc-a0044b4389.json
+.env
+
+openapi.json

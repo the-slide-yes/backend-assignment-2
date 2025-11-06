@@ -2,6 +2,36 @@ import Joi from "joi";
 import { RequestSchema } from "../middleware/validate";
 
 /**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Branch:
+ *       type: object
+ *       required:
+ *         - id
+ *         - name
+ *         - address
+ *         - phone
+ *       properties:
+ *         id:
+ *           type: string
+ *           description: The unique identifier for a Branch
+ *           example: "G5gRYX36bllXVjaY6ESh"
+ *         name:
+ *           type: string
+ *           description: The name of the Branch
+ *           example: "James Branch"
+ *         address:
+ *           type: string
+ *           description: The physical address of the Branch
+ *           example: "308 Negra Arroyo Lane, Albuquerque, New Mexico"
+ *         phone:
+ *           type: string
+ *           description: The office phone for the Branch
+ *           example: "222-222-2222"
+ */
+
+/**
  * Branch schema organised by request type
  */
 export const branchSchemas: Record<string, RequestSchema> = {
@@ -74,3 +104,34 @@ export const branchSchemas: Record<string, RequestSchema> = {
         }),
     },
 };
+
+/**
+ * @openapi
+ * components:
+ *   schemas:
+ *     Error:
+ *       type: object
+ *       required:
+ *         - error
+ *         - message
+ *       properties:
+ *         error:
+ *           type: string
+ *           description: Error type or code
+ *           example: "VALIDATION_ERROR"
+ *         message:
+ *           type: string
+ *           description: Human-readable error message
+ *           example: "The email field is required"
+ *         details:
+ *           type: array
+ *           items:
+ *             type: object
+ *             properties:
+ *               field:
+ *                 type: string
+ *                 example: "name"
+ *               issue:
+ *                 type: string
+ *                 example: "must not be empty"
+ */
