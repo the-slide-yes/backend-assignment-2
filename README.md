@@ -31,8 +31,70 @@ SWAGGER_SERVER_URL=http://localhost:3000/api/v1
 
 ## Where documentation???
 
-[Here!](https://the-slide-yes.github.io/backend-assignment-2/)
+It's right [Here!](https://the-slide-yes.github.io/backend-assignment-2/)
 
-## Do I have the time to do anything more tonight??
+Or, if you're looking for the local documentation, use the url `http://localhost:3000/api-docs` while the app is running.
 
-No
+## Perhaps how do I make requests to this API in code?
+
+Example: Get all employees with JavaScript
+
+```javascript
+const requestOptions = {
+  method: "GET",
+  redirect: "follow"
+};
+
+fetch("localhost:3000/api/v1/employees", requestOptions)
+  .then((response) => response.text())
+  .then((result) => console.log(result))
+  .catch((error) => console.error(error));
+```
+
+Example: Create a branch with JavaScript
+
+```javascript
+const myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+const raw = JSON.stringify({
+  "name": "Placeholder Branch Name",
+  "address": "Placeholder Address",
+  "phone": "Placeholder phone number"
+});
+
+const requestOptions = {
+  method: "POST",
+  headers: myHeaders,
+  body: raw,
+  redirect: "follow"
+};
+
+fetch("localhost:3000/api/v1/branches", requestOptions)
+  .then((response) => response.text())
+  .then((result) => console.log(result))
+  .catch((error) => console.error(error));
+```
+
+Example: Update an employee's email
+
+```javascript
+const myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+const raw = JSON.stringify({
+  "email": "jordan.gerete@hotmail.com"
+});
+
+const requestOptions = {
+  method: "PUT",
+  headers: myHeaders,
+  body: raw,
+  redirect: "follow"
+};
+
+fetch("localhost:3000/api/v1/employees/EMPLOYEEID", requestOptions)
+  .then((response) => response.text())
+  .then((result) => console.log(result))
+  .catch((error) => console.error(error));
+```
