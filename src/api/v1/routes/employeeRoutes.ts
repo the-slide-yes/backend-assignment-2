@@ -27,7 +27,7 @@ router.get("/employees", employeeController.getAllEmployees);
 
 /**
  * @openapi
- * /employees/:id:
+ * /employees/{id}:
  *   get:
  *     summary: Retrieves one employee with the specified ID
  *     tags: [Employees]
@@ -54,7 +54,7 @@ router.get("/employees/:id", validateRequest(employeeSchemas.getById), employeeC
 
 /**
  * @openapi
- * /employees/onBranch/:branchId:
+ * /employees/onBranch/{branchId}:
  *   get:
  *     summary: Retrieves all employees on the specified branch
  *     tags: [Employees]
@@ -81,7 +81,7 @@ router.get("/employees/onBranch/:branchId", validateRequest(employeeSchemas.getB
 
 /**
  * @openapi
- * /employees/inDepartment/:department:
+ * /employees/inDepartment/{department}:
  *   get:
  *     summary: Retrieves all employees in the specified department
  *     tags: [Employees]
@@ -161,12 +161,16 @@ router.get("/employees/inDepartment/:department", validateRequest(employeeSchema
  *                 $ref: '#/components/schemas/Employee'
  *       400:
  *         description: Invalid input data
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 $ref: '#/components/schemas/Error'
  */
 router.post("/employees", validateRequest(employeeSchemas.create), employeeController.createEmployee);
 
 /**
  * @openapi
- * /employees/:id:
+ * /employees/{id}:
  *   put:
  *     summary: Updates an employee with new data
  *     tags: [Employees]
@@ -219,6 +223,10 @@ router.post("/employees", validateRequest(employeeSchemas.create), employeeContr
  *               $ref: '#/components/schemas/Employee'
  *       400:
  *         description: Invalid input data
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 $ref: '#/components/schemas/Error'
  *       404:
  *         description: Employee not found
  */
@@ -226,7 +234,7 @@ router.put("/employees/:id", validateRequest(employeeSchemas.update), employeeCo
 
 /**
  * @openapi
- * /employees/:id:
+ * /employees/{id}:
  *   delete:
  *     summary: Deletes the employee with the specified ID
  *     tags: [Employees]

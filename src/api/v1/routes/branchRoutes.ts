@@ -27,7 +27,7 @@ router.get("/branches", branchController.getAllBranches);
 
 /**
  * @openapi
- * /branches/:id:
+ * /branches/{id}:
  *   get:
  *     summary: Retrieves one branch with the specified ID
  *     tags: [Branches]
@@ -90,12 +90,16 @@ router.get("/branches/:id", validateRequest(branchSchemas.get), branchController
  *                 $ref: '#/components/schemas/Branch'
  *       400:
  *         description: Invalid input data
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 $ref: '#/components/schemas/Error'
  */
 router.post("/branches", validateRequest(branchSchemas.create), branchController.createBranch);
 
 /**
  * @openapi
- * /branches/:id:
+ * /branches/{id}:
  *   put:
  *     summary: Updates a branch with new data
  *     tags: [Branches]
@@ -134,6 +138,10 @@ router.post("/branches", validateRequest(branchSchemas.create), branchController
  *               $ref: '#/components/schemas/Branch'
  *       400:
  *         description: Invalid input data
+ *         content:
+ *           application/json:
+ *             schema:
+ *                 $ref: '#/components/schemas/Error'
  *       404:
  *         description: Branch not found
  */
@@ -141,7 +149,7 @@ router.put("/branches/:id", validateRequest(branchSchemas.update), branchControl
 
 /**
  * @openapi
- * /branches/:id:
+ * /branches/{id}:
  *   delete:
  *     summary: Deletes the branch with the specified ID
  *     tags: [Branches]
