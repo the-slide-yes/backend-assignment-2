@@ -11,8 +11,6 @@ const router: Router = express.Router();
  *   get:
  *     summary: Retrieves a list of branches
  *     tags: [Branches]
- *     security:
- *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: A list of Branches
@@ -56,8 +54,6 @@ router.get("/branches/:id", validateRequest(branchSchemas.get), branchController
  *   post:
  *     summary: Create a new Branch
  *     tags: [Branches]
- *     security:
- *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:

@@ -11,8 +11,6 @@ const router: Router = express.Router();
  *   get:
  *     summary: Retrieves a list of employees
  *     tags: [Employees]
- *     security:
- *       - bearerAuth: []
  *     responses:
  *       200:
  *         description: A list of Employees
@@ -31,8 +29,6 @@ router.get("/employees", employeeController.getAllEmployees);
  *   get:
  *     summary: Retrieves one employee with the specified ID
  *     tags: [Employees]
- *     security:
- *       - bearerAuth: []
  *     parameters:
  *       - name: id
  *         in: path
@@ -58,8 +54,6 @@ router.get("/employees/:id", validateRequest(employeeSchemas.getById), employeeC
  *   get:
  *     summary: Retrieves all employees on the specified branch
  *     tags: [Employees]
- *     security:
- *       - bearerAuth: []
  *     parameters:
  *       - name: branchId
  *         in: path
@@ -85,8 +79,6 @@ router.get("/employees/onBranch/:branchId", validateRequest(employeeSchemas.getB
  *   get:
  *     summary: Retrieves all employees in the specified department
  *     tags: [Employees]
- *     security:
- *       - bearerAuth: []
  *     parameters:
  *       - name: department
  *         in: path
@@ -112,8 +104,6 @@ router.get("/employees/inDepartment/:department", validateRequest(employeeSchema
  *   post:
  *     summary: Create a new Employee
  *     tags: [Employees]
- *     security:
- *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -174,8 +164,6 @@ router.post("/employees", validateRequest(employeeSchemas.create), employeeContr
  *   put:
  *     summary: Updates an employee with new data
  *     tags: [Employees]
- *     security:
- *       - bearerAuth: []
  *     parameters:
  *       - name: id
  *         in: path
@@ -238,8 +226,6 @@ router.put("/employees/:id", validateRequest(employeeSchemas.update), employeeCo
  *   delete:
  *     summary: Deletes the employee with the specified ID
  *     tags: [Employees]
- *     security:
- *       - bearerAuth: []
  *     parameters:
  *       - name: id
  *         in: path
