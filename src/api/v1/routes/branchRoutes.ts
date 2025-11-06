@@ -97,7 +97,7 @@ router.post("/branches", validateRequest(branchSchemas.create), branchController
  * @openapi
  * /branches/:id:
  *   put:
- *     summary: Retrieves one branch with the specified ID
+ *     summary: Updates a branch with new data
  *     tags: [Branches]
  *     parameters:
  *       - name: id
