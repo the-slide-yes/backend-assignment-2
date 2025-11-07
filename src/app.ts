@@ -1,5 +1,16 @@
 import express, { Express } from "express";
 import morgan from "morgan";
+import helmet from "helmet";
+import cors from "cors";
+import dotenv from "dotenv";
+
+// Ensure environment variables are loaded before internal imports
+dotenv.config();
+
+import { getHelmetConfig } from "../config/helmetConfig";
+import { getCorsConfig } from "../config/corsConfig";
+import setupSwagger from "../config/swagger";
+
 import employeeRoutes from "./api/v1/routes/employeeRoutes";
 import branchRoutes from "./api/v1/routes/branchRoutes";
 
@@ -8,6 +19,11 @@ const app: Express = express();
 
 // Use morgan for HTTP request logging
 app.use(morgan("combined"));
+
+app.use(helmet());
+app.use(helmet(getHelmetConfig()));
+app.use(cors());
+app.use(cors(getCorsConfig()));
 
 // This allows the api request to have a body that exists
 // Without this, req.body will be undefined
@@ -29,5 +45,7 @@ app.get("/api/v1/health", (req, res) => {
         version: "1.0.0",
     });
 });
+
+setupSwagger(app);
 
 export default app;
