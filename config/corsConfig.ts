@@ -7,15 +7,13 @@ export const getCorsConfig: () => CorsOptions = (): CorsOptions => {
         // Allow all origins in development for easy testing
         return {
             origin: true,
-            credentials: true,
         } as CorsOptions;
     }
 
     // Strict origins in production
     return {
         origin: process.env.ALLOWED_ORIGINS?.split(",") || [],
-        credentials: true,
         methods: ["GET", "POST", "PUT", "DELETE"],
-        allowedHeaders: ["Content-Type", "Authorization"],
+        allowedHeaders: ["Content-Type"],
     } as CorsOptions;
 };

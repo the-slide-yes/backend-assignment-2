@@ -30,6 +30,5 @@ export const getHelmetConfig: () => HelmetOptions = (): HelmetOptions => {
             preload: true,
         },
         frameguard: { action: "deny" },
-        referrerPolicy: { policy: "no-referrer" },
     } as HelmetOptions;
 };
