@@ -98,3 +98,30 @@ fetch("localhost:3000/api/v1/employees/EMPLOYEEID", requestOptions)
   .then((result) => console.log(result))
   .catch((error) => console.error(error));
 ```
+
+## So what's the security like?
+
+Custom CORS and Helmet.js configurations apply different security headers to responses depending on whether it is in the development environment or not.
+
+If in development:
+- Helmet is configured to disable HTTPS enforcement, meaning HTTPS is not required.
+- CORS is configured to allow requests from all origins, which makes testing easier.
+
+If not in development:
+- Helmet is configured to 
+    - ensure any HTTP requests are automatically upgraded to HTTPS 
+    - disallow this API being put inside iframes (to prevent clickjacking).
+- CORS is configured to 
+    - restrict access to the api to only allow origins set in the environment variable `ALLOWED_ORIGINS`, which will ensure the api is not accessed by origins it should not be.
+    - only allow GET, POST, PUT, and DELETE method requests, which are the only ones which are used in this API.
+    - only allow content type in the request headers, as this is the only header which should be used in this API.
+
+Regardless of node environment, helmet is configured to:
+- disable content security policy, as it is unnecessary for JSON APIs.
+- hide server information from responses
+- prevent MIME sniffing
+
+Some features, such as allowing credentials, were excluded because this API does not have authentication or authorization, and therefore does not need them.
+
+## Environment variables?
+
