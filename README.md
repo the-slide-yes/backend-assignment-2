@@ -125,3 +125,10 @@ Some features, such as allowing credentials, were excluded because this API does
 
 ## Environment variables?
 
+As described in the installing guide above, environment variables are set in the `.env` file at the root of the project.
+
+- `NODE_ENV` describes if the API is being run in development or not development.
+- `PORT` specifies which port the server will run on.
+- `FIREBASE_PROJECT_ID`, `FIREBASE_PRIVATE_KEY`, and `FIREBASE_CLIENT_EMAIL` are obtained in a firebase service account json, these are not optional as the API will not run without them.
+- `SWAGGER_SERVER_URL` is the server url which the documentation generator will indicate as the server url.
+- `ALLOWED_ORIGINS`, which decides which origins are allowed to use this API when not in development mode (seperated by commas).
